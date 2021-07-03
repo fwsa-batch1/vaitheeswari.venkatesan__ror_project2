@@ -1,0 +1,38 @@
+<div class="container">
+  <section class="MenuCategorySection">
+    <section class="MenuCategorySection-Title">
+    </section>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Menu Category</th>
+          <% if @current_user.is_owner? ||  @current_user.is_clerk? %>
+            <th>Status</th>
+            <% if @current_user.is_owner?%>
+              <th>Edit</th>
+              <th>Delete</th>
+            <% end %>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <%menu_categories.all.each do |menu_category|%>
+          <tr class="Category">
+            <td ><%= link_to "#{menu_category.menu_category_name}",menu_items_path(menu_category_id:menu_category.id)%></td>
+            <% if @current_user.is_owner? ||  @current_user.is_clerk? %>
+              <td ><%=section_title %></td>
+              <% if @current_user.is_owner?%>
+                <td><%= link_to "Edit",edit_menu_category_path(menu_category.id)%></td>
+                <td>
+                  <%=form_with(url:"/menu_categories/#{menu_category.id}",method:"delete") do%>
+                    <%=image_submit_tag "trashcan.svg" %>
+                  <%end%>
+                </td>
+              <% end %>
+            <%end%>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </section>
+</div>

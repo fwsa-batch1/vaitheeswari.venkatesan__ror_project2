@@ -1,0 +1,11 @@
+<div class="container">
+  <h1 class="MenuCategory-Title">MenuCategory</h1>
+  <% if @current_user.is_owner?  %>
+    <%=form_with(url:"/menu_categories" ,method:"post",class:"MenuCategoryAdd") do%>
+      <%=text_field_tag "menu_category_name",nil,class:"MenuCategoryAdd-Text",placeholder:"Enter New Menu Category",autofocus: true %>
+      <%=submit_tag nil,class:"MenuCategoryAdd-Button",value:"Add"%>
+    <%end%>
+    <%=render partial:"menu_category-section", locals: {section_title: "Inactive",menu_categories: MenuCategory.not_active}%>
+  <% end %>
+  <%=render partial:"menu_category-section", locals: {section_title: "Active",menu_categories: MenuCategory.active}%>
+</div>

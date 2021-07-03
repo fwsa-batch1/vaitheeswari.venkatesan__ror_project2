@@ -31,22 +31,22 @@ class UsersController < ApplicationController
       phone_number: params[:phone_number],
       address: params[:address],
     )
-    if new_user.role == ""
-      new_user.role = "Customer"
-      if new_user.save
-        UserMailer.registration_confirmation(new_user).deliver_now
-        session[:current_user_id] = new_user.id
-        @current_cart = Cart.create!(user_id: session[:current_user_id])
-        session[:current_cart_id] = @current_cart.id
-        @current_cart.update(total_price: @current_cart.cart_total)
+    if new_user.save
+      UserMailer.registration_confirmation(new_user).deliver_now
+      session[:current_user_id] = new_user.id
+      @current_cart = Cart.create!(user_id: session[:current_user_id])
+      session[:current_cart_id] = @current_cart.id
+      if new_user.role == ""
+        new_user.role = "Customer"
+        new_user.save
         redirect_to menu_categories_path
       else
-        flash[:error] = new_user.errors.full_messages.join(", ")
-        redirect_to new_user_path
+        redirect_to users_path(:role => new_user.role)
       end
+      @current_cart.update(total_price: @current_cart.cart_total)
     else
-      new_user.save
-      redirect_to users_path(:role => new_user.role)
+      flash[:error] = new_user.errors.full_messages.join(", ")
+      redirect_to new_user_path
     end
   end
 

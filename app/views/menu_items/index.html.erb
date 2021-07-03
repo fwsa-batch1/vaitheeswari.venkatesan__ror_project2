@@ -1,0 +1,17 @@
+<div class="container">
+  <h1 class="MenuItem-Title">Menu</h1>
+  <p class="Back-Button"><%= link_to "Back",menu_categories_path,method: :get %> </p>
+  <h2><%= @menu_category_name %></h2>
+  <%  if @current_user.is_owner?  %>
+    <%=form_with(url:"/menu_items" ,method:"post",class:"MenuItemAdd") do%>
+      <%= hidden_field_tag "menu_category_id",@menu_category_id %>
+      <%=text_field_tag "name",nil,class:"MenuItemAdd-Name",placeholder:"Enter New Menu Item",autofocus: true %>
+      <%=text_field_tag "description",nil,class:"MenuItemAdd-Description",placeholder:"Enter Description",autofocus: true %>
+      <%=number_field_tag "price",nil, step: :any ,class:"MenuItemAdd-Price",placeholder:"Enter New Price",autofocus: true %>
+      <%=number_field_tag "quantity_available",nil,min:1,class:"MenuItemAdd-Quantity",placeholder:"Enter Quantity",autofocus: true %>
+      <%=submit_tag nil,class:"MenuItemAdd-Button",value:"Add"%>
+    <%end%>
+    <%=render partial:"menu_item-section", locals: {section_title: "Inactive",menu_items: @menu_items.not_active }%>
+  <% end %>
+  <%=render partial:"menu_item-section", locals: {section_title: "Active",menu_items: @menu_items.active }%>
+</div>

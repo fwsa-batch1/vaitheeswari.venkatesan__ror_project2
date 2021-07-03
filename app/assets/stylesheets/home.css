@@ -1,0 +1,38 @@
+.navbar{
+  background-color: #333;
+}
+
+.nav-item{
+ margin:auto;
+ margin-right:30px;
+}
+.navbar-brand{
+  color: #fff;
+
+}
+.nav-link{
+  color: #fff;
+}
+
+.SignOut{
+  position: absolute;
+  right: 100px;
+}
+
+.UserHeader{
+  font-size: medium;
+  color:rgb(30, 30, 46);
+}
+
+.btn{
+  background-color: #333;
+  color: #fff
+}
+
+.Side{
+  border: 10px solid #333;
+    position: fixed;
+    z-index: 1;
+    top:14em;
+    right:15em;
+}

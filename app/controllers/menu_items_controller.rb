@@ -10,7 +10,18 @@ class MenuItemsController < ApplicationController
   end
 
   def create
-    new_menu_item = MenuItem.create!(menu_category_id: params[:menu_category_id], name: params[:name].capitalize, description: params[:description].capitalize, price: params[:price], quantity_available: params[:quantity_available], status: true)
+    new_menu_item = MenuItem.new(
+      menu_category_id: params[:menu_category_id],
+      name: params[:name].capitalize,
+      description: params[:description].capitalize,
+      price: params[:price],
+      quantity_available: params[:quantity_available],
+      status: true,
+    )
+    if new_menu_item.save
+    else
+      flash[:error] = new_menu_item.errors.full_messages.join(", ")
+    end
     redirect_back(fallback_location: root_path)
   end
 

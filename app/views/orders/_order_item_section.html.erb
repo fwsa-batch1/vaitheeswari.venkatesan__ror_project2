@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="Side">
+    <h1><%= section_title %></h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantities</th>
+          <th>Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% order_items=@order.order_items %>
+        <% order_items.each do |order_item|%>
+          <tr class="Item">
+            <td class="OrderItem"><%= order_item.menu_item_name%></td>
+            <td class="OrderItem"><%= order_item.menu_item_price%></td>
+            <td class="OrderItem">
+              <span class="Order-Item"><%= order_item.quantity %></span>
+            </td>
+            <td class="OrderItem"><%= order_item.total%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

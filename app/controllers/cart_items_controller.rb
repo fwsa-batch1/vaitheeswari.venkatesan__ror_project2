@@ -35,10 +35,10 @@ class CartItemsController < ApplicationController
     if @cart_item.quantity > 1
       @cart_item.quantity -= 1
       @cart_item.save
+      @cart_item.update(total: @cart_item.item_total_price)
     else
       @cart_item.destroy
     end
-    @cart_item.update(total: @cart_item.item_total_price)
     redirect_back(fallback_location: root_path)
   end
 

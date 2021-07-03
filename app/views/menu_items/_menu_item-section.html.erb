@@ -1,0 +1,62 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <% if @current_user.is_owner? ||  @current_user.is_clerk? %>
+          <th>In Stock</th>
+          <th>Status</th>
+          <% if @current_user.is_owner? %>
+            <th>Edit</th>
+            <th>Delete</th>
+          <% end %>
+        <%end%>
+        <%if !@current_user.is_owner?  %>
+          <th>In The Cart</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% menu_items.each do |menu_item|%>
+        <tr class="Item">
+          <td class="MenuItem"><%= menu_item.name%></td>
+          <td class="MenuItem"><%= menu_item.description%></td>
+          <td class="MenuItem"><%= menu_item.price%></td>
+          <% if @current_user.is_owner? ||  @current_user.is_clerk? %>
+            <td><%=menu_item.quantity_available  %></td>
+            <td><%=section_title %></td>
+            <% if @current_user.is_owner? %>
+              <td><%= link_to "Edit",edit_menu_item_path(menu_item.id)%></td>
+              <td>
+                <%=form_with(url:"/menu_items/#{menu_item.id}",method:"delete") do%>
+                  <%=image_submit_tag "trashcan.svg" %>
+                <%end%>
+              </td>
+            <% end %>
+          <% end %>
+          <% if !@current_user.is_owner? %>
+            <%@cart_item=CartItem.where(cart_id:session[:current_cart_id]) %>
+            <% @cart=@cart_item.find_by(menu_item_id:menu_item.id) %>
+            <%@cart_menu_ids=@cart_item.menu_item_ids%>
+            <% @menu=menu_item %>
+            <% if menu_item.quantity_available > 0 %>
+              <td class="CartAdd">
+                <%if !@cart_menu_ids.include?(menu_item.id)%>
+                  <%= link_to "Add", cart_items_path(:menu_item_id => @menu ),method: :post  %>
+                <%else%>
+                  <%= link_to "-", cart_item_remove_path(:id =>@cart.id),method: :post  %>
+                  <span class="MenuItem-CartQuantity"><%=@cart.quantity%></span>
+                  <%= link_to "+", cart_item_add_path(:id =>@cart.id),method: :post  %>
+                <%end%>
+              </td>
+            <% else %>
+              <td>No stock</td>
+            <% end %>
+          <% end %>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>

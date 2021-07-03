@@ -8,7 +8,9 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if (user && user.authenticate(params[:password]))
       session[:current_user_id] = user.id
-      session[:current_cart_id] = Cart.find_by(user_id: session[:current_user_id]).id
+      if user.role != "Owner"
+        session[:current_cart_id] = Cart.find_by(user_id: session[:current_user_id]).id
+      end
       redirect_to menu_categories_path
     else
       flash[:error] = "Your login attempt was invalid. Please retry ."

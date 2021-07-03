@@ -1,0 +1,47 @@
+<div class="container">
+  <h1 class="Cart-Title"><%= section_title %>s</h1>
+  <%= link_to "Back ",menu_categories_path %>
+  <% if section_title=="Clerk" %>
+    <%=link_to "+  Create New Clerk",new_user_path(:role=>"Clerk"),class:"SignOut"%>
+  <% end %>
+  <br>
+  <% if !users.empty? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>E-mail</th>
+          <th>Member Since</th>
+          <th>Change Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.each do |user|%>
+          <tr class="Category">
+            <td class="Cart-Item"><%= user.id %></td>
+            <td class="Cart-Item"><%=link_to "#{user.first_name}", all_orders_path(:id=>user.id) %></td>
+            <td class="Cart-Item"><%= user.email %></td>
+            <td class="Cart-Item"><%= user.created_at.strftime("%F") %></td>
+            <td>
+              <% if user.role == "Customer" %>
+                <%= link_to "Change Role As Clerk",
+                      change_role_path(user.id),
+                      method: :patch,
+                      data: {confirm: "Are you sure?",disable: "Please wait.."}  %>
+              <% else %>
+                <%= link_to "Remove Clerk Role",
+                      change_role_path(user.id),
+                      method: :patch,
+                      data: {confirm: "Are you sure?",disable: "Please wait.."} %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <h3>No <%= section_title %> Added Yet</h3>
+  <% end %>
+</div>
+<%= pagy_bootstrap_nav(@pagy).html_safe%>

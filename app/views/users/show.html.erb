@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Hi, <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></h1>
+  <h2>Your User Id:</h2>
+  <span>
+    <h4><%=@user.id %></h4>
+  </span>
+  <h2>Your Address:</h2>
+  <span>
+    <h4><%=@user.address %></h4>
+  </span>
+  <h2>Your Phone Number:</h2>
+  <span>
+    <h4><%=@user.phone_number %></h4>
+  </span>
+  <h3><%= link_to "Edit",edit_user_path(@user.id)%></h3>
+</div>

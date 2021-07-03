@@ -1,0 +1,39 @@
+<div class="container">
+  <h1 class="NewUser-Title">Welcome New User</h1>
+  <section class="NewUser">
+    <%= form_with url:users_path do |form| %>
+      <div class="Form-Section">
+        <p class="Form-Input-Label">First Name:</p>
+        <%=form.text_field :first_name,class:"Form-Input"%>
+      </div>
+      <div class="Form-Section">
+        <p class="Form-Input-Label">Last Name:</p>
+        <%=form.text_field :last_name,class:"Form-Input"%>
+      </div>
+      <div class="Form-Section">
+        <p class="Form-Input-Label">Address:</p>
+        <%=form.text_field :address,class:"Form-Input"%>
+      </div>
+      <div class="Form-Section">
+        <p class="Form-Input-Label">Phone Number:</p>
+        <%=form.text_field :phone_number,class:"Form-Input"%>
+      </div>
+      <div class="Form-Section">
+        <p class="Form-Input-Label">Email:</p>
+        <%=form.email_field :email,class:"Form-Input"%>
+      </div>
+      <div class="Form-Section">
+        <p class="Form-Input-Label">Password:</p>
+        <%=form.password_field :password,class:"Form-Input"%>
+      </div>
+      <div class="Form-Section">
+        <% if params %>
+          <%=form.hidden_field :role,value:params[:role],class:"Form-Input"%>
+        <% end %>
+      </div>
+      <div class="Form-Section">
+        <%=form.submit "Sign-up",class:"Form-Submit"%>
+      </div>
+    <%end%>
+  </section>
+</div>

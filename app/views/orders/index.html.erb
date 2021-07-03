@@ -1,0 +1,28 @@
+<div class="container">
+  <h4 class="SignOut"><%= link_to 'Cancel Order', destroy_order_path(:id =>@order.id),  method: :delete, data: { confirm: 'Are you sure?' } %></h4>
+  <h5 class="Back-Button"><%= link_to "Back",menu_categories_path,method: :get %> </h5>
+  <% if @order.paid %>
+    <h1>Order Created</h1>
+    <h2>Your Order Id:</h2>
+    <span>
+      <h4><%= @order.id %></h4>
+    </span>
+    <h2>Name</h2>
+    <span>
+      <h4><%=  User.find(Order.find(@order.id).user_id).first_name %></h4>
+    </span>
+    <h2>Your Address:</h2>
+    <span>
+      <h4><%=  User.find(Order.find(@order.id).user_id).address %></h4>
+    </span>
+    <h2>Your Phone Number:</h2>
+    <span>
+      <h4><%=  User.find(Order.find(@order.id).user_id).phone_number %></h4>
+    </span>
+  <% end %>
+  <h2>Your Order Total Price:</h2>
+  <span>
+    <h4><%= @order.total_price %></h4>
+  </span>
+  <div><%=render partial:"order_item_section", locals: {section_title: "Order Items",order:@order }%></div>
+</div>

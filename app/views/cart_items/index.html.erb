@@ -1,0 +1,41 @@
+<div class="container">
+  <h1 class="Cart-Title">Cart</h1>
+  <%= link_to "Back To Shopping",menu_categories_path %>
+  <% if !@cart_items.empty? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Menu Name</th>
+          <th>In The Cart</th>
+          <th>Price</th>
+          <th>Delete Item</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart_items.each do |cart_item|%>
+          <tr class="Category">
+            <td class="Cart-Item"><%= cart_item.menu_item_name %></td>
+            <td class="Cart-Add">
+              <%= link_to "-", cart_item_remove_path(:id =>cart_item.id),method: :post  %>
+              <span class="Cart-Item"><%= cart_item.quantity %></span>
+              <%= link_to "+", cart_item_add_path(:id =>cart_item.id),method: :post  %>
+            </td>
+            <td class="Cart-Item"><%= cart_item.total %></td>
+            <td>
+              <%=form_with(url:"/cart_items/#{cart_item.id}",method:"delete") do%>
+                <%=image_submit_tag "trashcan.svg" %>
+              <%end%>
+            </td>
+          </tr>
+        <% end %>
+        <h3>Total:<%= @cart.total_price %></h3>
+        <p><%= link_to 'Delete Cart', destroy_cart_path,  method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      </tbody>
+    </table>
+    <%=form_with(url:orders_path(id:@cart.id) ,method:"post",class:"MenuCategoryAdd") do%>
+      <%=submit_tag nil,class:"MenuCategoryAdd-Button",value:"Confirm Order"%>
+    <%end%>
+  <% else %>
+    <h3>Add something to Cart</h3>
+  <% end %>
+</div>

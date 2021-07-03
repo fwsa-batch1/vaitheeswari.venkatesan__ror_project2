@@ -1,4 +1,6 @@
 class MenuItem < ActiveRecord::Base
+  validates :name, presence: true, uniqueness: true
+  validates :description, :price, :quantity_available, presence: true
   belongs_to :menu_category
 
   def display_string

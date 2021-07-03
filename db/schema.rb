@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_02_181243) do
+ActiveRecord::Schema.define(version: 2021_07_02_200554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,21 +26,21 @@ ActiveRecord::Schema.define(version: 2021_07_02_181243) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "carts_tables", force: :cascade do |t|
+  create_table "carts", force: :cascade do |t|
     t.bigint "user_id"
     t.decimal "total_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "menu_categories_tables", force: :cascade do |t|
+  create_table "menu_categories", force: :cascade do |t|
     t.string "menu_category_name"
     t.boolean "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "menu_items_tables", force: :cascade do |t|
+  create_table "menu_items", force: :cascade do |t|
     t.bigint "menu_category_id"
     t.string "name"
     t.text "description"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_181243) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "order_items_tables", force: :cascade do |t|
+  create_table "order_items", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "menu_item_id"
     t.string "menu_item_name"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_181243) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "orders_tables", force: :cascade do |t|
+  create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
     t.decimal "total_price"
     t.boolean "paid"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_181243) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users_tables", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "role"

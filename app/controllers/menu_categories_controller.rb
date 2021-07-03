@@ -3,13 +3,15 @@ class MenuCategoriesController < ApplicationController
 
   def index
     render "index"
-    # render plain: MenuCategory.all.map { |menu| menu.display_string }.join("\n")
   end
 
   def create
-    new_menu_category = MenuCategory.create!(menu_category_name: params[:menu_category_name].capitalize, status: true)
+    new_menu_category = MenuCategory.new(menu_category_name: params[:menu_category_name].capitalize, status: true)
+    if new_menu_category.save
+    else
+      flash[:error] = new_menu_category.errors.full_messages.join(", ")
+    end
     redirect_to menu_categories_path
-    # render plain: "Created ! #{new_menu_category.display_string} "
   end
 
   def update
