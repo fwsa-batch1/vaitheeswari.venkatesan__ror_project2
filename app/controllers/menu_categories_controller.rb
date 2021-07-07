@@ -2,6 +2,10 @@ class MenuCategoriesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
+    @menu_categories = MenuCategory.active
+    if params[:status] == "Inactive"
+      @menu_categories = MenuCategory.not_active
+    end
     render "index"
   end
 

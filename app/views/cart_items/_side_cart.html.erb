@@ -1,0 +1,41 @@
+<% @cart = Cart.find(session[:current_cart_id]) %>
+<% @cart.update(total_price: @cart.cart_total) %>
+<div class="div_scroll">
+  <%@cart_items=@cart.cart_items %>
+  <% if !@cart_items.empty? %>
+    <span>
+      <p class="delete" ><%= link_to 'Delete Cart', destroy_cart_path,  method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    </span>
+    <div class="cart_cont">
+      <% @cart_items.each do |cart_item|%>
+        <div class="foot_temp">
+          <div class="food_img"></div>
+          <div class="food_desc">
+            <div class="name_text"><%= cart_item.menu_item_name %></div>
+            <div class="name_desc">
+              <%=form_with(url:"/cart_items/#{cart_item.id}",method:"delete") do%>
+                <%=image_submit_tag "trashcan.svg" %>
+              <%end%>
+            </div>
+            <div class="price_text"><%= cart_item.total %></div>
+          </div>
+          <div class="inc_dec_opt">
+            <span style="border-right: .5px solid;margin-right: 2px;" class="circ"><%= link_to "-", cart_item_remove_path(:id =>cart_item.id),method: :post  %></span>
+            <span><%= cart_item.quantity %></span>
+            <span style="border-left: .5px solid;margin-left: 2px;" class="circ"><%= link_to "+", cart_item_add_path(:id =>cart_item.id),method: :post  %></span>
+          </div>
+        </div>
+      <%end%>
+      <div class="price_text">
+        <h4>Total: </h4>
+        <h5><%= @cart.total_price %></h5>
+      </div>
+    </div>
+    <%= link_to "<button class='card_checkout_btn view'>Confirm Order</button>".html_safe,edit_cart_item_path(@cart.id)%>
+  <% else %>
+    <div class="foot_temp">
+      <div class="empty_cart side">
+      </div>
+    </div>
+  <% end %>
+</div>

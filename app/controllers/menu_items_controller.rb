@@ -15,7 +15,6 @@ class MenuItemsController < ApplicationController
       name: params[:name].capitalize,
       description: params[:description].capitalize,
       price: params[:price],
-      quantity_available: params[:quantity_available],
       status: true,
     )
     if new_menu_item.save
@@ -32,7 +31,6 @@ class MenuItemsController < ApplicationController
     menu_item.description = params[:description]
     menu_item.price = params[:price]
     menu_item.status = params[:status]
-    menu_item.quantity_available = params[:quantity_available]
     menu_item.save!
     redirect_to menu_items_path(menu_category_id: menu_item.menu_category_id)
   end

@@ -1,16 +1,30 @@
-<div class="container">
-  <h1>Hi, <%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></h1>
-  <h2>Your User Id:</h2>
-  <span>
-    <h4><%=@user.id %></h4>
-  </span>
-  <h2>Your Address:</h2>
-  <span>
-    <h4><%=@user.address %></h4>
-  </span>
-  <h2>Your Phone Number:</h2>
-  <span>
-    <h4><%=@user.phone_number %></h4>
-  </span>
-  <h3><%= link_to "Edit",edit_user_path(@user.id)%></h3>
+<div class="main ">
+  <div class="row ">
+    <div class="col-lg-12 shos shadow-lg">
+      <div class="title"> <b>Personal Details:</b> </div>
+      <div class="details">
+        <table class="table bio">
+          <tr>
+            <td><b>Your User Id:</b></td>
+            <td><b><%=@user.id %></b></td>
+          </tr>
+          <tr>
+            <td><b>Name:</b></td>
+            <td><b><%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></b></td>
+          </tr>
+          <tr>
+            <td><b>Your Address:</b></td>
+            <td><b><%=@user.address %></b></td>
+          </tr>
+          <tr>
+            <td><b>Your Phone Number:</b></td>
+            <td><b><%=@user.phone_number %></b></td>
+          </tr>
+        </table>
+        <br>
+        <br>
+        <p><%= link_to "<button class='card_checkout_btn view'>Edit</button>".html_safe, edit_user_path(@user.id) %></p>
+      </div>
+    </div>
+  </div>
 </div>

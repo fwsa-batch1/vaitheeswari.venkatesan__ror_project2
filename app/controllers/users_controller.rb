@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    User.update(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], address: params[:address], phone_number: params[:phone_number])
+    User.find(params[:id]).update(user_params)
     redirect_to user_path(id: params[:id])
   end
 
@@ -59,5 +59,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.change_role
     redirect_to(users_path(:role => @user.role), notice: "#{@user.first_name} role is changed to #{@user.role} ")
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :password, :email, :phone_number, :address)
   end
 end

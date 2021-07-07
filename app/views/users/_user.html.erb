@@ -1,0 +1,58 @@
+<div class="Form-Section">
+  <div class="Form-Section-Label">
+    <span class="Form-Section-Label-Icon">
+      <i class="fas fa-user"></i>
+    </span>
+  </div>
+  <%=form.text_field :first_name,class:"Form-Input",placeholder:"First Name"%>
+</div>
+<div class="Form-Section">
+  <div class="Form-Section-Label">
+    <span class="Form-Section-Label-Icon">
+      <i class="fas fa-user"></i>
+    </span>
+  </div>
+  <%=form.text_field :last_name,class:"Form-Input",placeholder:"Last Name"%>
+</div>
+<div class="Form-Section">
+  <div class="Form-Section-Label">
+    <span class="Form-Section-Label-Icon">
+      <i class="fas fa-phone-square"></i>
+    </span>
+  </div>
+  <%=form.text_field :phone_number,class:"Form-Input",placeholder:"Phone Number"%>
+</div>
+<div class="Form-Section">
+  <div class="Form-Section-Label">
+    <span class="Form-Section-Label-Icon">
+      <i class="fas fa-map-marker-alt"></i>
+    </span>
+  </div>
+  <%=form.text_field :address,class:"Form-Input",placeholder:"Address"%>
+</div>
+<div class="Form-Section">
+  <div class="Form-Section-Label">
+    <span class="Form-Section-Label-Icon">
+      <i class="fas fa-envelope-square"></i>
+    </span>
+  </div>
+  <%=form.email_field :email,class:"Form-Input",placeholder:"Email"%>
+</div>
+<% if edit.nil?%>
+  <div class="Form-Section">
+    <div class="Form-Section-Label">
+      <span class="Form-Section-Label-Icon">
+        <i class="fas fa-key"></i>
+      </span>
+    </div>
+    <%=form.password_field :password,class:"Form-Input",placeholder:"Password"%>
+  </div>
+<% end %>
+<div class="Form-Section">
+  <% if params %>
+    <%=form.hidden_field :role,value:params[:role],class:"Form-Input"%>
+  <% end %>
+</div>
+<div class="form-group">
+  <%=form.submit "#{edit.nil? ? "Sign-up": "Update" }",class:"Form-Submit"%>
+</div>

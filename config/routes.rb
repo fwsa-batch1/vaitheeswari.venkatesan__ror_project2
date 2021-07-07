@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "home#index"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :menu_categories, :menu_items, :users, :cart_items, :carts, :orders, :order_items
+  resources :menu_categories, :menu_items, :users, :cart_items, :carts, :orders, :order_items, :password_resets
   get "/create", to: "order_items#create", as: :create_order_item
   get "/signin" => "sessions#new", as: :new_sessions
   post "/signin" => "sessions#create", as: :sessions
@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   delete "/delete_order" => "orders#destroy", as: :destroy_order
   get "all_orders", to: "orders#all_orders", as: :all_orders
   get "pending_orders", to: "orders#pending_orders", as: :pending_orders
+  get "cancel_orders", to: "orders#cancel_order", as: :cancel_order
 end

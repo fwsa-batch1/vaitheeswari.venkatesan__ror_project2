@@ -1,39 +1,16 @@
 <div class="container">
-  <h1 class="NewUser-Title">Welcome New User</h1>
-  <section class="NewUser">
+  <div class="card-header">
+    <%# <span onclick="document.getElementById('bab').style.display='none'" class="close" >&times;</span> %>
+    <h5>Welcome NewUser</h5>
+  </div>
+  <div class="NewUser">
     <%= form_with url:users_path do |form| %>
-      <div class="Form-Section">
-        <p class="Form-Input-Label">First Name:</p>
-        <%=form.text_field :first_name,class:"Form-Input"%>
-      </div>
-      <div class="Form-Section">
-        <p class="Form-Input-Label">Last Name:</p>
-        <%=form.text_field :last_name,class:"Form-Input"%>
-      </div>
-      <div class="Form-Section">
-        <p class="Form-Input-Label">Address:</p>
-        <%=form.text_field :address,class:"Form-Input"%>
-      </div>
-      <div class="Form-Section">
-        <p class="Form-Input-Label">Phone Number:</p>
-        <%=form.text_field :phone_number,class:"Form-Input"%>
-      </div>
-      <div class="Form-Section">
-        <p class="Form-Input-Label">Email:</p>
-        <%=form.email_field :email,class:"Form-Input"%>
-      </div>
-      <div class="Form-Section">
-        <p class="Form-Input-Label">Password:</p>
-        <%=form.password_field :password,class:"Form-Input"%>
-      </div>
-      <div class="Form-Section">
-        <% if params %>
-          <%=form.hidden_field :role,value:params[:role],class:"Form-Input"%>
-        <% end %>
-      </div>
-      <div class="Form-Section">
-        <%=form.submit "Sign-up",class:"Form-Submit"%>
-      </div>
+      <%= render partial:"user" ,locals:{form: form,edit:nil}%>
     <%end%>
-  </section>
+  </div>
+  <div class="Card-Footer">
+    <div class="Card-Footer-Content">
+      Already have an account? <%=link_to "SignIn", new_sessions_path%>
+    </div>
+  </div>
 </div>

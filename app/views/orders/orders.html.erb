@@ -1,43 +1,78 @@
+<style>
+  .page-item.active .page-link {
+    border-color: black;
+    background-color: #55c39e;
+  }
+</style>
 <div class="container">
-  <%= link_to "Back To Shopping",menu_categories_path %>
-  <h1 class="Cart-Title"><%= user %> <%=section_title %></h1>
+  <h4 class="MenuCategory-Title"><%= user %> <%=section_title %></h4>
   <% if !orders.empty? %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Order Id</th>
-          <th>Order Total</th>
-          <th>Order Placed on</th>
-          <th>Order Placed at</th>
-          <% if @current_user.is_owner? %>
-            <th>Mark As Delivered</th>
-          <% else %>
-            <th>Delivered at</th>
-          <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% orders.each do |order|%>
-          <tr class="Category">
-            <td class="Cart-Item"><%=link_to order.id,orders_path(id:order.id) %></td>
-            <td class="Cart-Item"><%= order.total_price %></td>
-            <td class="Cart-Item"><%= order.order_placed %></td>
-            <td class="Cart-Item"><%= order.created_at.strftime("%I:%M %P") %></td>
-            <% if (@current_user.is_owner? || @current_user.is_clerk?) && order.delivered_at == "Pending" %>
-              <td>
-                <%=form_with(url:order_path(id:order.id) ,method:"put",class:"MenuCategoryAdd") do%>
-                  <%=submit_tag nil,class:"MenuCategoryAdd-Button",value:"Pending"%>
-                <%end%>
-              </td>
-            <% else %>
-              <td class="Cart-Item"><%= order.delivered_at %></td>
-            <% end %>
-          </tr>
+    <div class="Report">
+      <% if section_title == "Orders" && @current_user.is_owner? %>
+        <%=form_with(url:"/all_orders",method:"get",class:"d-md-flex d-sm-block justify-content-between") do |form| %>
+          <div class="Form-Report">
+            <h5 class="Form-Input-Label">From Date:</p>
+            <%=form.date_field :from_date,class:"Form-Input"%>
+          </div>
+          <div class="Form-Report">
+            <h5 class="Form-Input-Label">To Date:</p>
+            <%=form.date_field :to_date,class:"Form-Input"%>
+          </div>
+          <%=submit_tag nil,class:"btn btn-outline-dark col-sm-2 Button",value:"Get Orders"%>
+        <%end%>
+      <% end %>
+      <div class="d-md-flex d-md-block justify-content-sm-between justify-content-sm-center  border-bottom border-2 text-light p-2 rounded-3 Background">
+        <div class="col-sm-1 align-self-center">
+          <h1 class="h6 fw-bold">Order ID</h1>
+        </div>
+        <div class="col-sm-2 align-self-center">
+          <h1 class="h6 fw-bold">Order Total</h1>
+        </div>
+        <div class="col-sm-2  align-self-center">
+          <h1 class="h6 fw-bold">Order Placed on</h1>
+        </div>
+        <div class="col-sm-2  align-self-center">
+          <h1 class="h6 fw-bold">Order Placed at</h1>
+        </div>
+        <% if @current_user.is_owner? %>
+          <div class="col-sm-2  align-self-center">
+            <h1 class="h6 fw-bold">Mark As Delivered</h1>
+          </div>
+        <% else %>
+          <div class="col-sm-2  align-self-center">
+            <h1 class="h6 fw-bold"> Delivered at</h1>
+          </div>
         <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <h3>No <%= section_title %> Yet</h3>
-  <% end %>
-</div>
-<%= pagy_bootstrap_nav(@pagy).html_safe%>
+      </div>
+      <% orders.each do |order|%>
+        <div class="d-md-flex  justify-content-sm-between justify-content-sm-center border-bottom border-2 my-2 bg-light p-2 rounded-3">
+          <div class="col-sm-1 align-self-center " >
+            <h6><%=link_to order.id,orders_path(id:order.id) %></h6>
+          </div>
+          <div class="col-sm-2 align-self-center" >
+            <h6 class="Cart-Item"><%= order.total_price %></h6>
+          </div>
+          <div class="col-sm-2 align-self-center" >
+            <h6 class="Cart-Item"><%= order.order_placed %></h6>
+          </div>
+          <div class="col-sm-2 align-self-center" >
+            <h6 class="Cart-Item"><%= order.created_at.in_time_zone("Chennai").strftime("%I:%M %P") %></h6>
+          </div>
+          <% if (@current_user.is_owner? || @current_user.is_clerk?) && order.delivered_at == "Pending" %>
+            <div class="col-sm-2  align-self-center">
+              <%=form_with(url:order_path(id:order.id) ,method:"put",class:"MenuCategoryAdd") do%>
+                <%=submit_tag nil,class:"MenuCategoryAdd-Button",value:"Pending"%>
+              <%end%>
+            </div>
+          <% else %>
+            <div class="col-md-2  align-self-center ">
+              <h6 class="Cart-Item"><%= order.delivered_at %></h6>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <h3>No <%= section_title %> Yet</h3>
+    <% end %>
+  </div>
+  <%= pagy_bootstrap_nav(@pagy).html_safe%>

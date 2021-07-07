@@ -1,0 +1,37 @@
+<div class="d-md-flex d-md-block justify-content-sm-between justify-content-sm-center  border-bottom border-2 text-light p-2 rounded-3 Background">
+  <div class="col-sm-2 align-self-center">
+    <h1 class="h6 fw-bold">Menu Name</h1>
+  </div>
+  <div class="col-sm-2 align-self-center">
+    <h1 class="h6 fw-bold">In The Cart</h1>
+  </div>
+  <div class="col-sm-2 align-self-center">
+    <h1 class="h6 fw-bold">Price</h1>
+  </div>
+  <div class="col-sm-2 align-self-center">
+    <h1 class="h6 fw-bold">Delete Item</h1>
+  </div>
+</div>
+<% cart_items.each do |cart_item|%>
+  <div class="d-md-flex  justify-content-sm-between justify-content-sm-center border-bottom border-2 my-2 bg-light p-2 rounded-3">
+    <div class="col-sm-2 align-self-center" >
+      <h6 class="Cart-Item"><%= cart_item.menu_item_name %></h6>
+    </div>
+    <div class="col-sm-2 align-self-center" >
+      <h6 class="Cart-Item">
+        <%= link_to "-", cart_item_remove_path(:id =>cart_item.id),method: :post  %>
+        <span class="Cart-Item"><%= cart_item.quantity %></span>
+        <%= link_to "+", cart_item_add_path(:id =>cart_item.id),method: :post  %>
+      </h6>
+    </div>
+    <div class="col-sm-2 align-self-center" >
+      <h6 class="Cart-Item"><%=cart_item.total %></h6>
+    </div>
+    <div class="col-sm-2 align-self-center" >
+      <h6 class="Cart-Item">
+        <%= link_to image_tag("trashcan.svg"),cart_item_path(cart_item.id),method: :delete %>
+      </h6>
+    </div>
+  </div>
+<% end %>
+<h3 class="Right">Total:<%=cart.total_price %></h3>

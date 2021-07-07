@@ -1,45 +1,65 @@
+<style>
+  .page-item.active .page-link {
+    border-color: black;
+    background-color: #55c39e;
+  }
+</style>
 <div class="container">
-  <h1 class="Cart-Title"><%= section_title %>s</h1>
-  <%= link_to "Back ",menu_categories_path %>
+  <h4 class="Cart-Title"><%= section_title %>s</h4>
   <% if section_title=="Clerk" %>
     <%=link_to "+  Create New Clerk",new_user_path(:role=>"Clerk"),class:"SignOut"%>
   <% end %>
   <br>
+  <br>
   <% if !users.empty? %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-          <th>E-mail</th>
-          <th>Member Since</th>
-          <th>Change Role</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% users.each do |user|%>
-          <tr class="Category">
-            <td class="Cart-Item"><%= user.id %></td>
-            <td class="Cart-Item"><%=link_to "#{user.first_name}", all_orders_path(:id=>user.id) %></td>
-            <td class="Cart-Item"><%= user.email %></td>
-            <td class="Cart-Item"><%= user.created_at.strftime("%F") %></td>
-            <td>
-              <% if user.role == "Customer" %>
-                <%= link_to "Change Role As Clerk",
+    <div class="d-md-flex d-md-block justify-content-sm-between justify-content-sm-center  border-bottom border-2 text-light p-2 rounded-3 Background">
+      <div class="col-sm-1 align-self-center">
+        <h1 class="h6 fw-bold">ID</h1>
+      </div>
+      <div class="col-sm-2 align-self-center">
+        <h1 class="h6 fw-bold">Name</h1>
+      </div>
+      <div class="col-sm-2 align-self-center">
+        <h1 class="h6 fw-bold">E-mail</h1>
+      </div>
+      <div class="col-sm-2 align-self-center">
+        <h1 class="h6 fw-bold">Member Since</h1>
+      </div>
+      <div class="col-sm-3 align-self-center">
+        <h1 class="h6 fw-bold">Change Role</h1>
+      </div>
+    </div>
+    <% users.each do |user|%>
+      <div class="d-md-flex  justify-content-sm-between justify-content-sm-center border-bottom border-2 my-2 bg-light p-2 rounded-3">
+        <div class="col-sm-1 align-self-center " >
+          <h6><%= user.id %></h6>
+        </div>
+        <div class="col-sm-2 align-self-center " >
+          <h6><%=link_to "#{user.first_name}", all_orders_path(:id=>user.id) %></h6>
+        </div>
+        <div class="col-sm-2 align-self-center " >
+          <h6><%= user.email %></h6>
+        </div>
+        <div class="col-sm-2 align-self-center " >
+          <h6><%= user.created_at.strftime("%F") %></h6>
+        </div>
+        <div class="col-sm-3 align-self-center " >
+          <h6>
+            <% if user.role == "Customer" %>
+              <%= link_to "Change Role As Clerk",
                       change_role_path(user.id),
                       method: :patch,
                       data: {confirm: "Are you sure?",disable: "Please wait.."}  %>
-              <% else %>
-                <%= link_to "Remove Clerk Role",
+            <% else %>
+              <%= link_to "Remove Clerk Role",
                       change_role_path(user.id),
                       method: :patch,
                       data: {confirm: "Are you sure?",disable: "Please wait.."} %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+            <% end %>
+          </h6>
+        </div>
+      </div>
+    <% end %>
   <% else %>
     <h3>No <%= section_title %> Added Yet</h3>
   <% end %>

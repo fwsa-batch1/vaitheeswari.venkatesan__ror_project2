@@ -1,0 +1,57 @@
+.shos {
+
+  height:300px ;
+  margin: auto;
+  background-image: linear-gradient(to bottom, #55c39e, #387ca3);
+  color: white;
+  margin-top: 15px;
+  padding: 10px;
+}
+
+
+.edit{
+  margin-top:50px;
+}
+
+.title {
+  width: 80%;
+
+  font-size:16px;
+  padding: 0px;
+  color: black;
+  }
+
+
+.details {
+  width: 90%;
+  height: 0vh;
+  /* background-color: rgb(255, 255, 255, 0.2); */
+  margin: auto;
+  padding: 0vw;
+  color: black;
+
+}
+
+
+tr {
+  border: 2px solid rgb(0, 0, 0, 0.0)
+}
+
+.bio {
+  font-size: 1.2vw
+}
+
+
+
+@media only screen and (max-width: 425px) {
+  .show {
+      width: 100vw;
+      height: 270vw
+  }
+
+  .bio {
+      font-size: 3.6vw
+  }
+
+
+}

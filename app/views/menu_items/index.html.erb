@@ -1,17 +1,56 @@
-<div class="container">
-  <h1 class="MenuItem-Title">Menu</h1>
-  <p class="Back-Button"><%= link_to "Back",menu_categories_path,method: :get %> </p>
-  <h2><%= @menu_category_name %></h2>
-  <%  if @current_user.is_owner?  %>
-    <%=form_with(url:"/menu_items" ,method:"post",class:"MenuItemAdd") do%>
-      <%= hidden_field_tag "menu_category_id",@menu_category_id %>
-      <%=text_field_tag "name",nil,class:"MenuItemAdd-Name",placeholder:"Enter New Menu Item",autofocus: true %>
-      <%=text_field_tag "description",nil,class:"MenuItemAdd-Description",placeholder:"Enter Description",autofocus: true %>
-      <%=number_field_tag "price",nil, step: :any ,class:"MenuItemAdd-Price",placeholder:"Enter New Price",autofocus: true %>
-      <%=number_field_tag "quantity_available",nil,min:1,class:"MenuItemAdd-Quantity",placeholder:"Enter Quantity",autofocus: true %>
-      <%=submit_tag nil,class:"MenuItemAdd-Button",value:"Add"%>
-    <%end%>
-    <%=render partial:"menu_item-section", locals: {section_title: "Inactive",menu_items: @menu_items.not_active }%>
+<div class="sidebar">
+  <%menu_categories = MenuCategory.all%>
+  <% menu_categories.each do|menu_category| %>
+    <%= link_to menu_category.menu_category_name,menu_items_path(menu_category_id:menu_category.id) %>
   <% end %>
-  <%=render partial:"menu_item-section", locals: {section_title: "Active",menu_items: @menu_items.active }%>
+</div>
+<div class="main">
+  <div class="mainb">
+    <p class="Back-Button"><%= link_to "Back",menu_categories_path,method: :get %> </p>
+    <h2><%= @menu_category_name %></h2>
+    <%  if @current_user.is_owner?  %>
+      <%# <%=render partial:"menu_item-section", locals: {section_title: "Inactive",menu_items: @menu_items.not_active }%>
+    <% end %>
+    <%=render partial:"menu_item-section", locals: {section_title: "Active",menu_items: @menu_items.active }%>
+  </div>
+  <div class="cart_box">
+    <% if !@current_user.is_owner?  %>
+      <div class="cart_title">
+        <h1>CART</h1>
+      </div>
+      <%=render "cart_items/side_cart"%>
+    <% else %>
+      <div class="cart_title">
+        <h3>Add New Menu Items</h3>
+        <br>
+      </div>
+      <%=form_with(url:"/menu_items" ,method:"post",class:"MenuCategoryAdd") do%>
+        <%= hidden_field_tag "menu_category_id",@menu_category_id %>
+        <div class="Form-Section">
+          <div class="Form-Section-Label">
+            <span class="Form-Section-Label-Icon">
+              <i class="fas fa-utensils"></i>
+            </span>
+          </div>
+          <%=text_field_tag "name",nil,class:"MenuItemAdd-Name",placeholder:"Enter New Menu Item",autofocus: true %>
+        </div>
+        <div class="Form-Section">
+          <div class="Form-Section-Label">
+            <span class="Form-Section-Label-Icon">
+              <i class="fas fa-utensils"></i>
+            </span>
+          </div>
+          <%=text_field_tag "description",nil,class:"MenuItemAdd-Description",placeholder:"Enter Description",autofocus: true %>        </div>
+        <div class="Form-Section">
+          <div class="Form-Section-Label">
+            <span class="Form-Section-Label-Icon">
+              <i class="fas fa-utensils"></i>
+            </span>
+          </div>
+          <%=number_field_tag "price",nil, step: :any ,class:"MenuItemAdd-Price",placeholder:"Enter New Price",autofocus: true %>
+        </div>
+        <%=submit_tag nil,class:"Add_btn",value:"Add"%>
+      <%end%>
+    <%end%>
+  </div>
 </div>

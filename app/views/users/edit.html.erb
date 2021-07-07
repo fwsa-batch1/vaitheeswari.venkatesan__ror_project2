@@ -1,11 +1,6 @@
-<div class="container">
+<div class="container mt-5">
   <%user = User.find(params[:id]) %>
-  <%=form_with(url:"/users/#{user.id}" ,method:"put",class:"MenuCategoryAdd") do%>
-    <%=text_field_tag "first_name",nil,value:user.first_name,class:"MenuItemUpdate-Text",placeholder:"Enter your First Name",autofocus: true %>
-    <%=text_field_tag "last_name",nil,value:user.last_name,class:"MenuItemUpdate-Description",placeholder:"Enter your Last Name",autofocus: true %>
-    <%=text_field_tag "email",nil,value:user.email,class:"MenuItemUpdate-Description",placeholder:"Enter your Email",autofocus: true %>
-    <%=text_field_tag "address",nil,value:user.address,class:"MenuItemUpdate-Description",placeholder:"Enter your Address",autofocus: true %>
-    <%=text_field_tag "phone_number",nil,value:user.phone_number,class:"MenuItemUpdate-Description",placeholder:"Enter your Phone Number",autofocus: true %>
-    <%=submit_tag nil,class:"MenuItemUpdate-Button",value:"Update"%>
+  <%=form_with(model: user ,method:"patch",class:"MenuCategoryAdd") do |form|%>
+    <%= render partial:"user",locals:{form: form,edit: true} %>
   <%end%>
 </div>

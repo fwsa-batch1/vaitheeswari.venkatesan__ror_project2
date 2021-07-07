@@ -1,5 +1,13 @@
+body{
+  background-color: #f8f9fa !important;
+  font-family: "apercu",sans-serif !important;
+}
+
 .navbar{
-  background-color: #333;
+  background-color:   #387ca3;
+  border-bottom: 1px solid #0000002b;
+  height: 45px;
+
 }
 
 .nav-item{
@@ -7,12 +15,150 @@
  margin-right:30px;
 }
 .navbar-brand{
+  font-size:18px ;
   color: #fff;
+  font-weight:bold;
 
 }
-.nav-link{
-  color: #fff;
+
+.sign-out{
+  margin-top: 4px;
 }
+
+.navbar-nav{
+  margin-left: auto;
+margin-right: 0px;
+}
+.nav-link{
+  font-size:16px ;
+  color: #fff;
+  font-weight:500;
+}
+
+
+.NewUser{
+
+  flex: 1 1 auto;
+  padding: 1.25rem;
+
+}
+.animate {
+-webkit-animation: animatezoom 0.6s;
+animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+from {-webkit-transform: scale(0)}
+to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+from {transform: scale(0)}
+to {transform: scale(1)}
+}
+
+.Form-Section{
+  position: relative;
+
+  display: flex;
+
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.Form-Section-Label {
+margin-right: -1px;
+display: flex;
+}
+.Form-Section-Label span {
+width: 50px;
+background-color:  #55c39e;
+color: #fff;
+border: 0 ;
+}
+.Form-Section-Label-Icon{
+  display: flex;
+  align-items: center;
+  padding: .375rem .75rem;
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: .25rem;
+
+}
+
+.fa, .fas {
+font-weight: 900;
+}
+.fa, .far, .fas {
+font-family: "Font Awesome 5 Free";
+}
+.fa, .fab, .fal, .far, .fas {
+-webkit-font-smoothing: antialiased;
+display: inline-block;
+font-style: normal;
+font-variant: normal;
+text-rendering: auto;
+line-height: 1;
+}
+
+.Form-Input{
+display: block;
+height: calc(2.25rem + 2px);
+padding: .375rem .75rem;
+font-size: 1rem;
+line-height: 1.5;
+color: #495057;
+background-color: #fff;
+background-clip: padding-box;
+border: 1px solid #ced4da;
+border-radius: .25rem;
+transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+}
+.Form-Submit{
+float:right;
+display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  -webkit-appearance: button;
+  color: black;
+  background-color:  #55c39e;
+  width: 100px;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.Card-Footer {
+padding: .75rem 1.25rem;
+background-color: rgba(0,0,0,.03);
+border-top: 1px solid rgba(0,0,0,.125);
+border-radius: 0 0 calc(.25rem - 1px) calc(.25rem - 1px);
+margin-top: 20px;
+}
+.Card-Footer-Content{
+color:black;
+justify-content: center;
+display: flex;
+
+}
+
 
 .SignOut{
   position: absolute;
@@ -26,13 +172,110 @@
 
 .btn{
   background-color: #333;
-  color: #fff
+  color:  #000;
 }
 
-.Side{
-  border: 10px solid #333;
-    position: fixed;
-    z-index: 1;
-    top:14em;
-    right:15em;
+
+
+.mainb{
+  width: 600px;
+}
+.main{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    margin-left: 200px ;
+
+}
+
+.clearfix{
+  flex: 1;
+  background-image: url("../assets/homepage.jpg");
+    background-size: 139% auto;
+}
+
+.home{
+  margin-top: 30px;
+    display: flex;
+
+}
+.container-fluidHome{
+  flex: 1;
+  color: #000;
+  padding-top: 60px;
+  text-align: left;
+
+
+}
+.container{
+  max-width: 1140px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    /* margin-left:85px !important; */
+    /* /* margin-right: auto !important ; */
+}
+.Orders{
+  max-width: 1140px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.display-2
+{
+    font-weight: 600;
+    line-height: 60px;
+        font-size: 54px;
+    margin-bottom: 26px;
+}
+
+.display-4
+{
+   font-weight: 300;
+    line-height: 58px;
+        font-size: 44px;
+        text-align: center;
+}
+
+.col-md-8{
+  max-width: 66.666667%;
+  margin: auto;
+
+}
+
+.butn{
+  padding: 5px 16px !important;
+  margin-right: 10px;
+  border-radius: 8px;
+  border: 1px solid black;
+  font-size: 15px;
+  color:white;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+.butn a{
+  text-decoration: none;
+
+}
+.nav-link:hover{
+  color:black !important;
+}
+.homebutn {
+  color: #0000007d;
+font-size:16px;
+transition:all .2s ease-in-out;
+transform-origin: left center;
+}
+
+
+.homebutn:hover
+{
+color:#000 !important;
+background-color: #55c39e;
+text-decoration: none;
+transform:scale(1.2);
+
+
 }

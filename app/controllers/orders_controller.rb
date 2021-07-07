@@ -16,9 +16,13 @@ class OrdersController < ApplicationController
       pending: true,
       delivered_at: "Pending",
       order_placed: Date.today,
+      shipping_address: params[:shipping_address],
+      billing_address: params[:billing_address],
     )
     if @current_user.is_clerk?
       new_order.update(pending: false, delivered_at: "Walk In Customer")
+    else
+      UserMailer.with(order: new_order, user: @current_user).order_confirmation.deliver_now
     end
     # render plain: "#{cart.total_price}"
     redirect_to create_order_item_path(:id => new_order.id, :cart_id => cart.id)
@@ -51,6 +55,14 @@ class OrdersController < ApplicationController
     @order.update(pending: false)
     delivered_at = @order.updated_at.strftime("%I:%M %P")
     @order.update(delivered_at: delivered_at)
+    UserMailer.with(order: @order, user: User.find(@order.user_id)).order_delivered.deliver_now
+    redirect_back(fallback_location: root_path)
+  end
+
+  def cancel_order
+    @order = Order.find(params[:id])
+    @order.update(pending: false)
+    @order.update(delivered_at: "Canceled")
     redirect_back(fallback_location: root_path)
   end
 

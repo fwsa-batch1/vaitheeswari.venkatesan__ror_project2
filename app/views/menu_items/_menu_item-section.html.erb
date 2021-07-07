@@ -1,62 +1,39 @@
 <div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <% if @current_user.is_owner? ||  @current_user.is_clerk? %>
-          <th>In Stock</th>
-          <th>Status</th>
-          <% if @current_user.is_owner? %>
-            <th>Edit</th>
-            <th>Delete</th>
-          <% end %>
-        <%end%>
-        <%if !@current_user.is_owner?  %>
-          <th>In The Cart</th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <% menu_items.each do |menu_item|%>
-        <tr class="Item">
-          <td class="MenuItem"><%= menu_item.name%></td>
-          <td class="MenuItem"><%= menu_item.description%></td>
-          <td class="MenuItem"><%= menu_item.price%></td>
-          <% if @current_user.is_owner? ||  @current_user.is_clerk? %>
-            <td><%=menu_item.quantity_available  %></td>
-            <td><%=section_title %></td>
-            <% if @current_user.is_owner? %>
-              <td><%= link_to "Edit",edit_menu_item_path(menu_item.id)%></td>
-              <td>
-                <%=form_with(url:"/menu_items/#{menu_item.id}",method:"delete") do%>
-                  <%=image_submit_tag "trashcan.svg" %>
-                <%end%>
-              </td>
-            <% end %>
-          <% end %>
+  <div class="row ">
+    <% menu_items.each do |menu_item|%>
+      <div class="card" >
+        <div class="card-img-top"></div>
+        <div class="card-body">
+          <h4 class="CategoryName"><%= menu_item.name%></h4>
+          <h4 class="CategoryName"><%= menu_item.description%></h4>
+          <h4 class="CategoryName"><%= menu_item.price%></h4>
           <% if !@current_user.is_owner? %>
             <%@cart_item=CartItem.where(cart_id:session[:current_cart_id]) %>
             <% @cart=@cart_item.find_by(menu_item_id:menu_item.id) %>
             <%@cart_menu_ids=@cart_item.menu_item_ids%>
             <% @menu=menu_item %>
-            <% if menu_item.quantity_available > 0 %>
-              <td class="CartAdd">
-                <%if !@cart_menu_ids.include?(menu_item.id)%>
-                  <%= link_to "Add", cart_items_path(:menu_item_id => @menu ),method: :post  %>
-                <%else%>
-                  <%= link_to "-", cart_item_remove_path(:id =>@cart.id),method: :post  %>
-                  <span class="MenuItem-CartQuantity"><%=@cart.quantity%></span>
-                  <%= link_to "+", cart_item_add_path(:id =>@cart.id),method: :post  %>
-                <%end%>
-              </td>
-            <% else %>
-              <td>No stock</td>
-            <% end %>
+            <div class="CartAdd">
+              <%if !@cart_menu_ids.include?(menu_item.id)%>
+                <%= link_to "<button class='card_checkout_btn view'>Add</button>".html_safe, cart_items_path(:menu_item_id => @menu ),method: :post  %>
+              <%else%>
+                <div class="inc_dec_opt_btn">
+                  <span style="border-right: .5px solid;margin-right: 2px;" class="circ leftbtn"><%= link_to "-", cart_item_remove_path(:id =>@cart.id),method: :post  %></span>
+                  <span><%= @cart.quantity %></span>
+                  <span style="border-left: .5px solid;margin-left: 2px;" class="circ rightbtn"><%= link_to "+", cart_item_add_path(:id =>@cart.id),method: :post  %></span>
+                </div>
+              <%end%>
+            </div>
           <% end %>
-        </tr>
-      <%end%>
-    </tbody>
-  </table>
+        </div>
+        <% if @current_user.is_owner?%>
+          <div class="menu_footer">
+            <h6><%=link_to "<button class='card_checkout_btn'>Edit</button>".html_safe,edit_menu_item_path(menu_item.id)%></h6>
+            <%=form_with(url:"/menu_items/#{menu_item.id}",method:"delete") do%>
+              <%=submit_tag nil,class:"card_checkout_btn",value:"Delete"%>
+            <%end%>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

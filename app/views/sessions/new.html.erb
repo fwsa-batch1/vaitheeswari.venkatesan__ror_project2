@@ -1,18 +1,36 @@
 <div class="container">
-  <h1 class="NewUser-Title">Sign-in Existing User</h1>
-  <section class="NewUser">
-    <%= form_with url:sessions_path do |form| %>
+  <div class="card-header">
+    <h5>Sign-in Existing User</h5>
+  </div>
+  <div class="NewUser">
+    <%= form_with url:sessions_path  do |form| %>
       <div class="Form-Section">
-        <p class="Form-Input-Label">Email:</p>
-        <%=form.email_field :email,class:"Form-Input"%>
+        <div class="Form-Section-Label">
+          <span class="Form-Section-Label-Icon">
+            <i class="fas fa-envelope-square"></i>
+          </span>
+        </div>
+        <%=form.email_field :email,class:"Form-Input",placeholder:"Email"%>
       </div>
       <div class="Form-Section">
-        <p class="Form-Input-Label">Password:</p>
-        <%=form.password_field :password,class:"Form-Input"%>
+        <div class="Form-Section-Label">
+          <span class="Form-Section-Label-Icon">
+            <i class="fas fa-key"></i>
+          </span>
+        </div>
+        <%=form.password_field :password,class:"Form-Input",placeholder:"Password"%>
       </div>
-      <div class="Form-Section">
+      <div class="form-group">
         <%=form.submit "Sign-in!",class:"Form-Submit"%>
       </div>
     <%end%>
-  </section>
+  </div>
+  <div class="Card-Footer">
+    <div class="Card-Footer-Content">
+      Don't have an account? <%=link_to "SignUp", new_user_path%>
+    </div>
+    <div class="Card-Footer-Content">
+      <%= link_to 'Forgot password?', new_password_reset_path %>
+    </div>
+  </div>
   <div class="container">

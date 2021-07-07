@@ -1,11 +1,39 @@
-<div class="container">
-  <h1 class="MenuCategory-Title">MenuCategory</h1>
+<div class="sidebar">
   <% if @current_user.is_owner?  %>
-    <%=form_with(url:"/menu_categories" ,method:"post",class:"MenuCategoryAdd") do%>
-      <%=text_field_tag "menu_category_name",nil,class:"MenuCategoryAdd-Text",placeholder:"Enter New Menu Category",autofocus: true %>
-      <%=submit_tag nil,class:"MenuCategoryAdd-Button",value:"Add"%>
-    <%end%>
-    <%=render partial:"menu_category-section", locals: {section_title: "Inactive",menu_categories: MenuCategory.not_active}%>
+    <%= link_to "Inactive",menu_categories_path(status:"Inactive") %>
   <% end %>
-  <%=render partial:"menu_category-section", locals: {section_title: "Active",menu_categories: MenuCategory.active}%>
+  <%= link_to "Active",menu_categories_path(status:"Active") %>
+</div>
+<div class="main">
+  <div class="mainb">
+    <h1 class="MenuCategory-Title">Today's special</h1>
+    <%=render partial:"menu_category-section",locals:{menu_categories: @menu_categories}%>
+  </div>
+  <div class="cart_box">
+    <% if !@current_user.is_owner?  %>
+      <div class="cart_title">
+        <h1>CART</h1>
+      </div>
+      <%=render "cart_items/side_cart"%>
+    <% else %>
+      <div class="cart_title">
+        <h3>Add new Category</h3>
+        <br>
+        <br>
+      </div>
+      <%=form_with(url:"/menu_categories" ,method:"post",class:"MenuCategoryAdd") do%>
+        <div class="Form-Section">
+          <div class="Form-Section-Label">
+            <span class="Form-Section-Label-Icon">
+              <i class="fas fa-utensils"></i>
+            </span>
+          </div>
+          <%=text_field_tag "menu_category_name",nil,class:"MenuCategoryAdd-Text",placeholder:"Enter New Menu Category",autofocus: true %>
+        </div>
+        <br>
+        <br>
+        <%=submit_tag nil,class:"Add_btn",value:"Add"%>
+      <%end%>
+    <%end%>
+  </div>
 </div>
