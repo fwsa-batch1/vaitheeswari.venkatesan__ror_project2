@@ -38,7 +38,7 @@
 
 }
 .empty_cart{
-  background-image:url("../assets/nocart.png") ;
+  background-image:url("https://i1.wp.com/www.huratips.com/wp-content/uploads/2019/04/empty-cart.png?fit=603%2c288") ;
     height: 400px;
     width: 800px;
     background-repeat:no-repeat;
@@ -149,9 +149,11 @@
 }
 .inner_cont
 {
-width: 50%;
+width: 30%;
+margin-right:20px ;
   height: 200px;
-  border: 1px solid rebeccapurple;
+  border: 2px solid #55c39e;
+  box-shadow: 5px 10px 8px 10px #888888;
   box-sizing: border-box;
   min-width: 300px;
   padding: 0px 10px 10px 10px;
@@ -187,4 +189,11 @@ margin-left: 0px !important;
 
 .Address{
   width:100%
+}
+
+.edit{
+  margin-left: 7rem;
+  background-color: #55c39e;
+  margin-top: 5px;
+
 }

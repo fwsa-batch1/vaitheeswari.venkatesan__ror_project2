@@ -18,7 +18,6 @@ class CartItemsController < ApplicationController
       quantity: 1,
       total: menu_item.price,
     )
-    # render plain: "#{session[:current_cart_id]} #{menu_item.id} #{menu_item.name} #{menu_item.price}"
     redirect_back(fallback_location: root_path)
   end
 

@@ -3,9 +3,7 @@
   <% if !@cart_items.empty? %>
     <p class="Right"><%= link_to 'Delete Cart', destroy_cart_path,  method: :delete, data: { confirm: 'Are you sure?' } %></p>
     <%=render partial:"items", locals: {cart:@cart,cart_items:@cart_items }%>
-    <%=form_with(url:orders_path(id:@cart.id) ,method:"post",class:"MenuCategoryAdd") do%>
-      <%=submit_tag nil,class:"card_checkout_btn",value:"Confirm Order"%>
-    <%end%>
+    <%= link_to "<button class='card_checkout_btn'>Confirm Order</button>".html_safe,edit_cart_item_path(@cart.id)%>
   <% else %>
     <div class="empty_cart">
       <h5>Your cart is empty

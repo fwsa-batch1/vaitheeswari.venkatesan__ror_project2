@@ -4,7 +4,7 @@
                 data-aos-offset="0">Cafeteria Manager</h1>
     <p class="lead " data-aos="fade-up" data-aos-duration="1000"
                 data-aos-delay="600">One Stop for your hunger</p>
-    <%=link_to "View Today's Menu >>", new_sessions_path,class:"btn-text d-inline-block border-top border-bottom mt-4 pt-1 pb-1 homebutn" %>
+    <%=link_to "View Today's Menu >>", "#{ @current_user ? menu_categories_path : new_sessions_path}" ,class:"btn-text d-inline-block border-top border-bottom mt-4 pt-1 pb-1 homebutn" %>
   </div>
   <div class="clearfix"></div>
 </div>

@@ -1,12 +1,27 @@
-<div class="container">
+<div class="container mt-5">
   <%menu_category = MenuCategory.find(params[:id]) %>
-  <%=form_with(url:"/menu_categories/#{menu_category.id}" ,method:"put",class:"MenuCategoryAdd") do%>
-    <%=text_field_tag "menu_category_name",nil,value:menu_category.menu_category_name,class:"MenuCategoryUpdate-Text",placeholder:"Enter New Menu Category",autofocus: true %>
-    <p>Status:</p>
-    <%[true,false].each do |status|%>
-      <%= radio_button_tag "status",status,value:menu_category.status %>
-      <%= label_tag " #{status}" %>
-    <% end %>
-    <%=submit_tag nil,class:"MenuCategoryUpdate-Button",value:"Update"%>
-  <%end%>
+  <p class="Back-Button"><%= link_to 'Back', 'javascript:history.back()' %> </p>
+  <h4>MenuCategory Edit:</h4>
+  <div class="mt-5">
+    <%=form_with(url:"/menu_categories/#{menu_category.id}" ,method:"put",class:"MenuCategoryAdd") do%>
+      <div class="Form-Section">
+        <div class="Form-Section-Label">
+          <span class="Form-Section-Label-Icon">
+            <i class="fas fa-utensils"></i>
+          </span>
+        </div>
+        <%=text_field_tag "menu_category_name",nil,value:menu_category.menu_category_name,class:"MenuCategoryUpdate-Text",placeholder:"Enter New Menu Category",autofocus: true %>
+      </div>
+      <div class="Form-Section">
+        <div class="Form-Section-Label">
+          <p>Status:</p>
+          <%[true,false].each do |status|%>
+            <%= radio_button_tag "status",status,value:menu_category.status %>
+            <%= label_tag " #{status}" %>
+          <% end %>
+        </div>
+      </div>
+      <%=submit_tag nil,class:"edit float-right",value:"Update"%>
+    <%end%>
+  </div>
 </div>

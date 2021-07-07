@@ -23,11 +23,6 @@ class MenuCategoriesController < ApplicationController
     id = params[:id]
     menu_category_name = params[:menu_category_name]
     status = params[:status]
-    # if status == "Active"
-    #   status = true
-    # else
-    #   status = false
-    # end
     menu_category = MenuCategory.find(id)
     menu_category.menu_category_name = menu_category_name
     menu_category.status = status

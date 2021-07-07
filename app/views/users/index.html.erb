@@ -5,6 +5,7 @@
   }
 </style>
 <div class="container">
+  <p class="Back-Button"><%= link_to 'Back', 'javascript:history.back()' %> </p>
   <h4 class="Cart-Title"><%= section_title %>s</h4>
   <% if section_title=="Clerk" %>
     <%=link_to "+  Create New Clerk",new_user_path(:role=>"Clerk"),class:"SignOut"%>

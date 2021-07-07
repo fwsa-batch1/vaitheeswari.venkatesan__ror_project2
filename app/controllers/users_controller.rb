@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     render "new"
   end
 
-  # To show all the users
+
   def index
     if params[:role] == "Clerk"
       @pagy, @users = pagy(User.clerks, items: 5)
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     render "show"
   end
 
-  # To create a new user
+
   def create
     new_user = User.new(
       first_name: params[:first_name].capitalize,

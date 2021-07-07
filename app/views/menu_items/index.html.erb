@@ -6,7 +6,7 @@
 </div>
 <div class="main">
   <div class="mainb">
-    <p class="Back-Button"><%= link_to "Back",menu_categories_path,method: :get %> </p>
+    <p class="Back-Button"><%= link_to 'Back', 'javascript:history.back()' %> </p>
     <h2><%= @menu_category_name %></h2>
     <%  if @current_user.is_owner?  %>
       <%# <%=render partial:"menu_item-section", locals: {section_title: "Inactive",menu_items: @menu_items.not_active }%>

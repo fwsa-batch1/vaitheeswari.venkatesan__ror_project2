@@ -6,7 +6,6 @@ class CartsController < ApplicationController
     cart_items.each do |cart_item|
       cart_item.destroy
     end
-    # Cart.find(session[:current_cart_id]).destroy
     session[:current_cart_id] = nil
     @current_cart = nil
     redirect_to menu_categories_path

@@ -17,11 +17,11 @@
           <div class="row mb-2 order">
             <div class="col-sm-6 order_sec">
               <h6 class="mb-3"><strong>Shipping Address:</strong></h6>
-              <div><%=  User.find(Order.find(@order.id).user_id).address %></div>
+              <div><%=  @order.shipping_address %></div>
             </div>
             <div class="col-sm-6 order_sec">
               <h6 class="mb-3"><strong>Billing Address:</strong></h6>
-              <div><%=  User.find(Order.find(@order.id).user_id).address %></div>
+              <div><%=   @order.billing_address %></div>
             </div>
             <div class="col-sm-6 order_sec">
               <h6 class="mb-3">Details:</h6>

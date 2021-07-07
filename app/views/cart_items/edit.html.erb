@@ -1,30 +1,34 @@
-<div >
+<div class="container">
   <% @cart=Cart.find(params[:id]) %>
   <% @cart_items=@cart.cart_items %>
-  <%=form_with(url:orders_path(id:@cart.id) ,method:"post",id:"editmain") do |form|%>
-    <div class="inner_cont">
-      <div class="top_header">
-        <span class="header">Shipping address :</span><span class="edit_btn">edit</span>
-      </div>
-      <div class="detail_cnt">
-        <div class="address_detail">
-          <%=form.text_area :shipping_address,value:User.find(session[:current_user_id]).address,class:"Form-Input Address",placeholder:"Address"%>
+  <div >
+    <%=render partial:"items", locals: {cart:@cart,cart_items:@cart_items }%>
+  </div>
+  <%=form_with(url:orders_path(id:@cart.id) ,method:"post",class:"d-flex") do |form|%>
+    <div id="editmain">
+      <div class="inner_cont">
+        <div class="top_header">
+          <span class="header">Shipping address :</span><span class="edit_btn">edit</span>
+        </div>
+        <div class="detail_cnt">
+          <div class="address_detail">
+            <%=form.text_area :shipping_address,value:User.find(session[:current_user_id]).address,class:"Form-Input Address",placeholder:"Address"%>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="inner_cont">
-      <div class="top_header">
-        <span class="header">Billing address :</span><span class="edit_btn">edit</span>
-      </div>
-      <div class="detail_cnt">
-        <div class="address_detail">
-          <%=form.text_area :billing_address,value:User.find(session[:current_user_id]).address,class:"Form-Input Address",placeholder:"Address"%>
+      <div class="inner_cont">
+        <div class="top_header">
+          <span class="header">Billing address :</span><span class="edit_btn">edit</span>
+        </div>
+        <div class="detail_cnt">
+          <div class="address_detail">
+            <%=form.text_area :billing_address,value:User.find(session[:current_user_id]).address,class:"Form-Input Address",placeholder:"Address"%>
+          </div>
         </div>
       </div>
-    </div>
-    <div>
-      <%=render partial:"items", locals: {cart:@cart,cart_items:@cart_items }%>
-    </div>
-    <%=form.submit "Place Order",class:"checkout_btn"%>
-  <% end %>
+      <div>
+        <%=form.submit "Place Order",class:"butn d-flex justify-content-end edit "%>
+      </div>
+    <% end %>
+  </div>
 </div>

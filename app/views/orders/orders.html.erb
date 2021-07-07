@@ -5,6 +5,7 @@
   }
 </style>
 <div class="container">
+  <p class="Back-Button"><%= link_to 'Back', 'javascript:history.back()' %> </p>
   <h4 class="MenuCategory-Title"><%= user %> <%=section_title %></h4>
   <% if !orders.empty? %>
     <div class="Report">

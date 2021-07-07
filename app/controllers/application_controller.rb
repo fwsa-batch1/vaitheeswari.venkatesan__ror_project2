@@ -20,7 +20,6 @@ class ApplicationController < ActionController::Base
         session[:current_cart_id] = @current_cart.id
         @current_cart.update(total_price: @current_cart.cart_total)
       end
-      # render plain: "cart id:#{session[:current_cart_id]}, use id:#{@current_user.id}"
     end
   end
 
