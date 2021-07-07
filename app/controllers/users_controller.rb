@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       address: params[:address],
     )
     if new_user.save
-      UserMailer.registration_confirmation(new_user).deliver_now
+      # UserMailer.registration_confirmation(new_user).deliver_now
       session[:current_user_id] = new_user.id
       @current_cart = Cart.create!(user_id: session[:current_user_id])
       session[:current_cart_id] = @current_cart.id
