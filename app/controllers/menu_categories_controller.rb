@@ -1,5 +1,6 @@
 class MenuCategoriesController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  before_action :ensure_user_logged_in
+  before_action :ensure_owner, only: [:update, :create, :destroy]
 
   def index
     @menu_categories = MenuCategory.active

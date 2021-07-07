@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :ensure_user_logged_in, only: [:create, :new]
+  before_action :ensure_owner, only: [:change]
 
   def new
     render "new"

@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   before_action :ensure_user_logged_in
+  before_action :ensure_owner, only: [:update]
+  before_action :ensure_clerk, only: [:update]
 
   def index
     @order = Order.find(params[:id])
