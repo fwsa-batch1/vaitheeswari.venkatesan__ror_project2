@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :ensure_owner, only: [:change]
 
   def new
-    render "new"
+    current_user
   end
 
   def index

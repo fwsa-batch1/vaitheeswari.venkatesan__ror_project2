@@ -27,4 +27,9 @@ class UserMailer < ApplicationMailer
     @user, @order = params[:user], params[:order]
     mail(to: @user.email, subject: "Order delivered!")
   end
+
+  def order_cancelled
+    @user, @order = params[:user], params[:order]
+    mail(to: @user.email, subject: "Order Cancelled")
+  end
 end

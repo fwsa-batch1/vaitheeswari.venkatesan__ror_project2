@@ -1,0 +1,11 @@
+<h2>Order Canceled!</h2>
+<h3>Hello <%= @user.first_name %><%= @user.last_name %>
+  <p>
+    Your order with id: <span ><%= @order.id %>   placed  at <span>
+        <h5><%= @order.created_at.in_time_zone("Chennai").strftime("%d %B,%Y - %I:%M %p") %></h5>
+        is cancelled at
+        <h5><%= @order.created_at.in_time_zone("Chennai").strftime("%d %B,%Y - %I:%M %p") %></h5>
+        .
+      </span>
+    </p>
+    <p>Thanks For Using Cafeteria Manager!</p>

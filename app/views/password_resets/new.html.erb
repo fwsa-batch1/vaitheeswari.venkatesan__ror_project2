@@ -1,10 +1,16 @@
-<h1>Reset Password</h1>
-<%= form_tag password_resets_path, :method => :post do %>
-  <div class='field'>
-    <%= label_tag :email %>
-    <%= text_field_tag :email, params[:email] %>
-  </div>
-  <div class='actions'>
-    <%= submit_tag "Reset Password" %>
-  </div>
-<% end %>
+<div class="container mt-5">
+  <h1>Reset Password</h1>
+  <%= form_tag password_resets_path, :method => :post,class:"EditMenu" do %>
+    <div class="Form-Section">
+      <div class="Form-Section-Label">
+        <span class="Form-Section-Label-Icon">
+          <i class="fas fa-envelope-square"></i>
+        </span>
+      </div>
+      <%= email_field :email,params[:email],class:"Form-Input",placeholder:"Email"%>
+    </div>
+    <div class="actions">
+      <%=submit_tag "Reset" ,class:"Form-Submit"%>
+    </div>
+  <% end %>
+</div>

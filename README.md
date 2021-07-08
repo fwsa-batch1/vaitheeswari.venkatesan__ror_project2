@@ -1,24 +1,35 @@
-# README
+# CAFETERIA-MANAGER-SAAS-SOFTWARE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The Cafeteria Manager  is  a fully functioning SaaS software that can be used by any number of users on the web.
 
-Things you may want to cover:
+[HEROKU LINK](https://cafeteria-manager-saas.herokuapp.com)
 
-* Ruby version
+## The features present in the application are:
 
-* System dependencies
+### Online Customer persona
 
-* Configuration
+* Customer should be able to Sign-up
 
-* Database creation
+* Customer can see the menu and add items to cart
 
-* Database initialization
+* Customer should see the cart while ordering
 
-* How to run the test suite
+* Customer can finalize the order with a “checkout” button
 
-* Services (job queues, cache servers, search engines, etc.)
+* Customer can see the status of orders
 
-* Deployment instructions
+* The shopping cart should be durable and available across sessions
 
-* ...
+### Cafeteria Billing Clerk
+
+* Clerk can mark orders as delivered.
+
+* Clerk can create orders for offline customers.
+
+### Cafeteria Owner
+
+* Owner can manage the menu.
+
+* Owner can see reports.
+
+* Owner can manage users.

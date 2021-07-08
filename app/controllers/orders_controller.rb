@@ -1,7 +1,5 @@
 class OrdersController < ApplicationController
   before_action :ensure_user_logged_in
-  before_action :ensure_owner, only: [:update]
-  before_action :ensure_clerk, only: [:update]
 
   def index
     @order = Order.find(params[:id])
@@ -31,7 +29,11 @@ class OrdersController < ApplicationController
 
   def all_orders
     if current_user.is_owner?
-      @pagy, @orders = pagy(Order.all, items: 5)
+      orders = Order.all
+      if params[:from_date] && params[:to_date]
+        orders = Order.where("order_placed >= ? AND order_placed <= ?", params[:from_date], params[:to_date])
+      end
+      @pagy, @orders = pagy(orders, items: 5)
     else
       user = User.find(params[:id])
       @pagy, @orders = pagy(user.orders, items: 5)
@@ -54,7 +56,7 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @order.update(pending: false)
-    delivered_at = @order.updated_at.strftime("%I:%M %P")
+    delivered_at = @order.updated_at.in_time_zone("Chennai").strftime("%I:%M %P")
     @order.update(delivered_at: delivered_at)
     UserMailer.with(order: @order, user: User.find(@order.user_id)).order_delivered.deliver_now
     redirect_back(fallback_location: root_path)
@@ -64,6 +66,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.update(pending: false)
     @order.update(delivered_at: "Canceled")
+    UserMailer.with(order: @order, user: @current_user).order_cancelled.deliver_now
     redirect_back(fallback_location: root_path)
   end
 

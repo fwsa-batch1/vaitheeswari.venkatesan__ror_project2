@@ -25,13 +25,13 @@ class ApplicationController < ActionController::Base
 
   def ensure_owner
     unless @current_user.is_owner?
-      redirect_to(menu_categories_path, alert: "No access for Customers")
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
     end
   end
 
   def ensure_clerk
     unless @current_user.is_clerk?
-      redirect_to(menu_categories_path, alert: "No access for Customers")
+      render :file => "#{Rails.root}/public/404.html", layout: false, status: :not_found
     end
   end
 
