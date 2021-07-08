@@ -28,14 +28,14 @@ class OrdersController < ApplicationController
   end
 
   def all_orders
-    if current_user.is_owner?
+    user = User.find(params[:id])
+    if current_user.is_owner? and user.is_owner?
       orders = Order.all
       if params[:from_date] && params[:to_date]
         orders = Order.where("order_placed >= ? AND order_placed <= ?", params[:from_date], params[:to_date])
       end
       @pagy, @orders = pagy(orders, items: 5)
     else
-      user = User.find(params[:id])
       @pagy, @orders = pagy(user.orders, items: 5)
       user_name = user.first_name.capitalize
     end

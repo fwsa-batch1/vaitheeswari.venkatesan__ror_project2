@@ -160,7 +160,7 @@
     text-align: center;
 }
  .circ a{
-   color:#fff;
+   color:#555 !important;
  }
 .leftbtn{
   float:left;

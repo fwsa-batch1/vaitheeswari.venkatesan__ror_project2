@@ -33,9 +33,9 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <%=link_to "Profile", user_path(:id =>session[:current_user_id]),method:"get",class:"dropdown-item" %>
                 <% if @current_user.is_owner? || @current_user.is_clerk? %>
-                  <%=link_to "Pending Orders", pending_orders_path,method:"get",class:"dropdown-item" %>
+                  <%=link_to "Pending Orders", pending_orders_path(:id=>session[:current_user_id]),method:"get",class:"dropdown-item" %>
                   <% if @current_user.is_owner?%>
-                    <%=link_to "All Orders", all_orders_path,class:"dropdown-item" %>
+                    <%=link_to "All Orders", all_orders_path(:id=>session[:current_user_id]),class:"dropdown-item" %>
                     <div class="dropdown-divider"></div>
                     <%=link_to "Clerks", users_path(:role=>"Clerk"),method:"get",class:"dropdown-item" %>
                     <%=link_to "Users", users_path(:role=>"Customer"),method:"get",class:"dropdown-item" %>
