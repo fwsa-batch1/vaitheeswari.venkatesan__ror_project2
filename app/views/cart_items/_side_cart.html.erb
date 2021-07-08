@@ -4,7 +4,7 @@
   <%@cart_items=@cart.cart_items %>
   <% if !@cart_items.empty? %>
     <span>
-      <p class="delete" ><%= link_to 'Delete Cart', destroy_cart_path,  method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      <p class="delete" ><%= link_to 'X', destroy_cart_path,  method: :delete, data: { confirm: 'Are you sure?' } %></p>
     </span>
     <div class="cart_cont">
       <% @cart_items.each do |cart_item|%>
@@ -31,11 +31,12 @@
         <h5><%= @cart.total_price %></h5>
       </div>
     </div>
-    <%= link_to "<button class='card_checkout_btn view confirm'>Confirm Order</button>".html_safe,edit_cart_item_path(@cart.id)%>
-  <% else %>
-    <div class="foot_temp">
-      <div class="empty_cart side">
-      </div>
+  </div>
+  <%= link_to "<button class='card_checkout_btn confirm'>Confirm Order</button>".html_safe,edit_cart_item_path(@cart.id)%>
+<% else %>
+  <div class="foot_temp">
+    <div class="empty_cart side">
     </div>
-  <% end %>
+  </div>
+<% end %>
 </div>

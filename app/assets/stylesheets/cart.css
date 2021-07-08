@@ -8,14 +8,14 @@
   margin-top:30px ;
   border: 1px solid #0000000d;
     width: 350px;
-    height:350px;
+    height:420px;
     background: #fafafa;
     padding: 10px;
     box-shadow: 0px 4px 12px -5px rgb(0, 0, 0 / 30%);
     overflow: auto;
     border-radius: 10px;
     position: fixed;
-    right:0;
+    right:15px;
 }
 .cart_title
 {
@@ -28,11 +28,12 @@
 }
 .cart_cont
 {
+  margin-bottom:30px;
     background: #fff;
     border-radius: 10px;
     height: calc(100% - 43px);
     box-shadow: 0px 1px 10px -5px rgb(0, 0 ,0 / 30%);
-	  margin-bottom: 60px;
+
 }
 .food_img
 {
@@ -129,8 +130,9 @@
     bottom: 10px;
 }
 .confirm{
-  position:absolute;
-  bottom:0px;
+  position: absolute !important;
+  width: calc(100% - 20px) !important;
+  bottom:10px;
 }
 
 .total{
@@ -145,7 +147,7 @@
 {
   max-height: 315px;
   overflow:auto;
-  position: relative;
+  /* position: relative; */
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -227,4 +229,24 @@ margin-left: 0px !important;
   background-color: #55c39e;
   margin-top: 5px;
 
+}
+
+
+.delete{
+position: absolute;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    background: white;
+    border: 1px solid #000000a1;
+    border-radius: 20%;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.delete a{
+  color: #dc3545;;
 }

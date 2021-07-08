@@ -6,13 +6,13 @@
 </div>
 <div class="main">
   <div class="mainb">
-    <h1 class="MenuCategory-Title">Today's special</h1>
+    <h2 class="MenuCategory-Title">Today's special</h2>
     <%=render partial:"menu_category-section",locals:{menu_categories: @menu_categories}%>
   </div>
   <div class="cart_box">
     <% if !@current_user.is_owner?  %>
       <div class="cart_title">
-        <h1>CART</h1>
+        <h3>CART</h3>
       </div>
       <%=render "cart_items/side_cart"%>
     <% else %>

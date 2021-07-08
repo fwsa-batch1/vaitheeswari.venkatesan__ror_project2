@@ -212,8 +212,6 @@ display: flex;
     width: 100%;
     padding: 0px;
     margin: 0px;
-    /* margin-left:85px !important; */
-    /* /* margin-right: auto !important ; */
 }
 .Orders{
   max-width: 1140px;
@@ -228,6 +226,11 @@ display: flex;
     line-height: 60px;
         font-size: 54px;
     margin-bottom: 26px;
+}
+
+.Title{
+  font-size: 78px !important;
+
 }
 
 .display-4
@@ -264,7 +267,7 @@ display: flex;
   color:black !important;
 }
 .homebutn {
-  color:#00000091;
+color:#00000091;
 font-size:16px;
 transition:all .2s ease-in-out;
 transform-origin: left center;
@@ -275,7 +278,7 @@ padding-right: 10px;
 
 .homebutn:hover
 {
-color:#000 !important;
+color:white !important;
 background-color: #55c39e;
 text-decoration: none;
 transform:scale(1.2);

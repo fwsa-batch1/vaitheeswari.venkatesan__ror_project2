@@ -1,5 +1,5 @@
 <div class="container">
-  <h4 class="MenuCategory-Title Cart">Cart</h4>
+  <h5 class="MenuCategory-Title Cart">Cart</h5>
   <% if !@cart_items.empty? %>
     <p class="Right"><%= link_to 'Delete Cart', destroy_cart_path,  method: :delete, data: { confirm: 'Are you sure?' } %></p>
     <%=render partial:"items", locals: {cart:@cart,cart_items:@cart_items }%>
