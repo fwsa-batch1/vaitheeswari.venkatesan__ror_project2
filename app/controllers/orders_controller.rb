@@ -23,8 +23,8 @@ class OrdersController < ApplicationController
     )
     if @current_user.is_clerk?
       new_order.update(pending: false, delivered_at: "Walk In Customer")
-      # else
-      #   UserMailer.with(order: new_order, user: @current_user).order_confirmation.deliver_now
+    else
+      UserMailer.with(order: new_order, user: @current_user).order_confirmation.deliver_now
     end
     redirect_to create_order_item_path(:id => new_order.id, :cart_id => cart.id)
   end
@@ -56,7 +56,7 @@ class OrdersController < ApplicationController
     @order.update(pending: false)
     delivered_at = @order.updated_at.strftime("%I:%M %P")
     @order.update(delivered_at: delivered_at)
-    # UserMailer.with(order: @order, user: User.find(@order.user_id)).order_delivered.deliver_now
+    UserMailer.with(order: @order, user: User.find(@order.user_id)).order_delivered.deliver_now
     redirect_back(fallback_location: root_path)
   end
 

@@ -6,7 +6,6 @@ class UsersController < ApplicationController
     render "new"
   end
 
-
   def index
     if params[:role] == "Clerk"
       @pagy, @users = pagy(User.clerks, items: 5)
@@ -21,7 +20,6 @@ class UsersController < ApplicationController
     render "show"
   end
 
-
   def create
     new_user = User.new(
       first_name: params[:first_name].capitalize,
@@ -33,7 +31,7 @@ class UsersController < ApplicationController
       address: params[:address],
     )
     if new_user.save
-      # UserMailer.registration_confirmation(new_user).deliver_now
+      UserMailer.registration_confirmation(new_user).deliver_now
       session[:current_user_id] = new_user.id
       @current_cart = Cart.create!(user_id: session[:current_user_id])
       session[:current_cart_id] = @current_cart.id

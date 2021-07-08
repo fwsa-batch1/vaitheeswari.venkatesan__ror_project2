@@ -25,7 +25,13 @@ class ApplicationController < ActionController::Base
 
   def ensure_owner
     unless @current_user.is_owner?
-      redirect_to(menu_categories_path, alert: "Your'e not allowed to access the page")
+      redirect_to(menu_categories_path, alert: "No access for Customers")
+    end
+  end
+
+  def ensure_clerk
+    unless @current_user.is_clerk?
+      redirect_to(menu_categories_path, alert: "No access for Customers")
     end
   end
 
