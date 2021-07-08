@@ -1,17 +1,24 @@
 <div class="sidebar">
-  <%menu_categories = MenuCategory.all%>
+  <%menu_categories = @current_user.is_owner? ? MenuCategory.all : MenuCategory.all.active%>
   <% menu_categories.each do|menu_category| %>
-    <%= link_to menu_category.menu_category_name,menu_items_path(menu_category_id:menu_category.id) %>
+    <div class="dropdown">
+      <a class=" dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= menu_category.menu_category_name%>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <% if @current_user.is_owner?  %>
+          <%= link_to "Inactive",menu_items_path(menu_category_id:menu_category.id,status:"Inactive")  %>
+        <% end %>
+        <%= link_to "Active",menu_items_path(menu_category_id:menu_category.id,status:"Active")  %>
+      </div>
+    </div>
   <% end %>
 </div>
 <div class="main">
   <div class="mainb">
     <p class="Back-Button"><%= link_to 'Back', 'javascript:history.back()' %> </p>
     <h2><%= @menu_category_name %></h2>
-    <%  if @current_user.is_owner?  %>
-      <%# <%=render partial:"menu_item-section", locals: {section_title: "Inactive",menu_items: @menu_items.not_active }%>
-    <% end %>
-    <%=render partial:"menu_item-section", locals: {section_title: "Active",menu_items: @menu_items.active }%>
+    <%=render partial:"menu_item-section", locals: {menu_items: @menu_items}%>
   </div>
   <div class="cart_box">
     <% if !@current_user.is_owner?  %>

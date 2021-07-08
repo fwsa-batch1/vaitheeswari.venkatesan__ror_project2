@@ -250,6 +250,7 @@ display: flex;
   border-radius: 8px;
   border: 1px solid black;
   font-size: 15px;
+  margin-top: 4px;
   color:white;
   height: 32px;
   box-sizing: border-box;
@@ -263,10 +264,12 @@ display: flex;
   color:black !important;
 }
 .homebutn {
-  color: #000000cf;
+  color:#00000091;
 font-size:16px;
 transition:all .2s ease-in-out;
 transform-origin: left center;
+padding-left: 10px;
+padding-right: 10px;
 }
 
 

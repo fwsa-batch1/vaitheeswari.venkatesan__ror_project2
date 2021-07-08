@@ -1,21 +1,26 @@
 <div class="container">
   <div class="row ">
-    <%menu_categories.all.each do |menu_category|%>
-      <div class="card" >
-        <div class="card-img-top"></div>
-        <div class="card-body">
-          <h4 class="CategoryName"><%="#{menu_category.menu_category_name}"%></h4>
-          <%= link_to "<button class='card_checkout_btn view'>View</button>".html_safe,menu_items_path(menu_category_id:menu_category.id)%>
-        </div>
-        <% if @current_user.is_owner?%>
-          <div class="menu_footer">
-            <h6><%=link_to "<button class='card_checkout_btn'>Edit</button>".html_safe,edit_menu_category_path(menu_category.id)%></h6>
-            <%=form_with(url:"/menu_categories/#{menu_category.id}",method:"delete") do%>
-              <%=submit_tag nil,class:"card_checkout_btn",value:"Delete"%>
-            <%end%>
+    <% if !menu_categories.empty? %>
+      <%menu_categories.all.each do |menu_category|%>
+        <div class="card" >
+          <div class="card-img-top"></div>
+          <div class="card-body">
+            <h4 class="CategoryName"><%="#{menu_category.menu_category_name}"%></h4>
+            <%= link_to "<button class='card_checkout_btn view'>View</button>".html_safe,menu_items_path(menu_category_id:menu_category.id)%>
           </div>
-        <% end %>
-      </div>
+          <% if @current_user.is_owner?%>
+            <div class="menu_footer">
+              <h6><%=link_to "<button class='card_checkout_btn'>Edit</button>".html_safe,edit_menu_category_path(menu_category.id)%></h6>
+              <%=form_with(url:"/menu_categories/#{menu_category.id}",method:"delete") do%>
+                <%=submit_tag nil,class:"card_checkout_btn",value:"Delete"%>
+              <%end%>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <br>
+      <h3>No menu categories yet :(</h3>
     <% end %>
   </div>
 </div>

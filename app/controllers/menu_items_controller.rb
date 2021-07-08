@@ -1,13 +1,15 @@
 class MenuItemsController < ApplicationController
   before_action :ensure_user_logged_in
-  before_action :ensure_owner, only: [:update, :create, :destroy]
+  before_action :ensure_owner, only: [:update, :create, :destroy, :edit]
 
   def index
     @menu_category_id = params[:menu_category_id]
     @menu_category_name = MenuCategory.find(@menu_category_id).menu_category_name
-    @menu_items = MenuItem.where("menu_category_id = ?", @menu_category_id)
+    @menu_items = MenuItem.where("menu_category_id = ?", @menu_category_id).active
+    if params[:status] == "Inactive"
+      @menu_items = MenuItem.where("menu_category_id = ?", @menu_category_id).not_active
+    end
     render "index"
-    # render plain: MenuItem.all.map { |menu| menu.display_string }.join("\n")
   end
 
   def create

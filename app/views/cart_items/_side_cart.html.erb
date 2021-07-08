@@ -26,12 +26,12 @@
           </div>
         </div>
       <%end%>
-      <div class="price_text">
+      <div class="price_text total">
         <h4>Total: </h4>
         <h5><%= @cart.total_price %></h5>
       </div>
     </div>
-    <%= link_to "<button class='card_checkout_btn view'>Confirm Order</button>".html_safe,edit_cart_item_path(@cart.id)%>
+    <%= link_to "<button class='card_checkout_btn view confirm'>Confirm Order</button>".html_safe,edit_cart_item_path(@cart.id)%>
   <% else %>
     <div class="foot_temp">
       <div class="empty_cart side">

@@ -1,4 +1,8 @@
 
+.MenuCategory-Title{
+ margin-left: 0px;
+}
+
 .cart_box
 {
   margin-top:30px ;
@@ -101,6 +105,15 @@
     cursor: pointer;
     text-align: center;
 }
+
+.circ{
+  color: rgb(34, 34, 34);
+}
+
+.circ a {
+  color: rgb(153, 150, 150) !important;
+}
+
 .checkout_btn
 {
   width: calc(100% - 20px);
@@ -115,6 +128,14 @@
   	position: absolute;
     bottom: 10px;
 }
+.confirm{
+  position:absolute;
+  bottom:0px;
+}
+
+.total{
+  padding: 5px 10px 0px 10px;
+}
 
 .foot_temp:last-child {
     border: none;
@@ -122,9 +143,19 @@
 
 .div_scroll
 {
-    max-height: 315px;
-    overflow: auto;
+  max-height: 315px;
+  overflow:auto;
+  position: relative;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
+
+.div_scroll::-webkit-scrollbar {
+  display: none;
+}
+
+
+
 
 .Add_btn
 {

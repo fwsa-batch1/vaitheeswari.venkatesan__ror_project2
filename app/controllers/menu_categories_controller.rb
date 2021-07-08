@@ -1,6 +1,6 @@
 class MenuCategoriesController < ApplicationController
   before_action :ensure_user_logged_in
-  before_action :ensure_owner, only: [:update, :create, :destroy]
+  before_action :ensure_owner, only: [:update, :create, :destroy, :edit]
 
   def index
     @menu_categories = MenuCategory.active
@@ -35,8 +35,5 @@ class MenuCategoriesController < ApplicationController
     menu_category = MenuCategory.find(id)
     menu_category.destroy
     redirect_to menu_categories_path
-  end
-
-  def show()
   end
 end
