@@ -31,7 +31,7 @@
                 <%=@current_user.first_name.capitalize%>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <%=link_to "Profile", user_path(:id =>session[:current_user_id]),method:"get",class:"dropdown-item" %>
+                <%=link_to "Profile", user_path(:id =>"profile"),method:"get",class:"dropdown-item" %>
                 <% if @current_user.is_owner? || @current_user.is_clerk? %>
                   <%=link_to "Pending Orders", pending_orders_path(:id=>session[:current_user_id]),method:"get",class:"dropdown-item" %>
                   <% if @current_user.is_owner?%>
