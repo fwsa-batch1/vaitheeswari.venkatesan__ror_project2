@@ -9,7 +9,12 @@ class SessionsController < ApplicationController
     if (user && user.authenticate(params[:password]))
       session[:current_user_id] = user.id
       if user.role != "Owner"
-        session[:current_cart_id] = Cart.find_by(user_id: session[:current_user_id]).id
+        if Cart.where(user_id: session[:current_user_id]).empty?
+          @current_cart = Cart.create!(user_id: session[:current_user_id])
+          session[:current_cart_id] = @current_cart.id
+        else
+          session[:current_cart_id] = Cart.find_by(user_id: session[:current_user_id]).id
+        end
       end
       redirect_to menu_categories_path
     else
