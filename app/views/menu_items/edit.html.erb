@@ -30,7 +30,7 @@
     <div class="Form-Section">
       <div class="Form-Section-Label">
         <p>Status:</p>
-        <%[true,false].each do |status|%>
+        <%[!menu_item.status,menu_item.status].each do |status|%>
           <%= radio_button_tag "status",status,value:menu_item.status %>
           <%= label_tag " #{status}" %>
         <% end %>

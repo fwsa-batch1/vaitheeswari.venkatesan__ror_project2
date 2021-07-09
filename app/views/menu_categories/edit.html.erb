@@ -15,7 +15,7 @@
       <div class="Form-Section">
         <div class="Form-Section-Label">
           <p>Status:</p>
-          <%[true,false].each do |status|%>
+          <%[!menu_category.status,menu_category.status].each do |status|%>
             <%= radio_button_tag "status",status,value:menu_category.status %>
             <%= label_tag " #{status}" %>
           <% end %>
