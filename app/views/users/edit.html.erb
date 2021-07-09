@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <p class="Back-Button"><%= link_to 'Back', 'javascript:history.back()' %> </p>
-  <%user = User.find(params[:id]) %>
+  <%user = @current_user %>
   <%=form_with(model: user ,method:"patch",class:"MenuCategoryAdd") do |form|%>
     <%= render partial:"user",locals:{form: form,edit: true} %>
   <%end%>

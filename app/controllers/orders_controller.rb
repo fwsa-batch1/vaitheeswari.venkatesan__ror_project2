@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :ensure_user_logged_in
 
   def index
-    @order = Order.find(params[:id])
+    @order = current_user.orders.find(params[:id])
     @order.update(total_price: @order.order_total)
     render "index"
   end
@@ -35,20 +35,22 @@ class OrdersController < ApplicationController
         orders = Order.where("order_placed >= ? AND order_placed <= ?", params[:from_date], params[:to_date])
       end
       @pagy, @orders = pagy(orders, items: 5)
-    else
+    elsif current_user.is_owner?
       @pagy, @orders = pagy(user.orders, items: 5)
       user_name = user.first_name.capitalize
+    else
+      @pagy, @orders = pagy(current_user.orders, items: 5)
+      user_name = current_user.first_name.capitalize
     end
-    render "orders", locals: { user: user_name, section_title: "Orders", orders: @orders.order(id: :desc) }
+    render "orders", locals: { user: user_name, section_title: "Orders", orders: @orders.order(pending: :desc, id: :desc) }
   end
 
   def pending_orders
     if current_user.is_owner? || current_user.is_clerk?
       @pagy, @orders = pagy(Order.pending_orders, items: 5)
     else
-      user = User.find(params[:id])
-      @pagy, @orders = pagy(user.orders.pending_orders, items: 5)
-      user_name = user.first_name.capitalize
+      @pagy, @orders = pagy(current_user.orders.pending_orders, items: 5)
+      user_name = current_user.first_name.capitalize
     end
     render "orders", locals: { user: user_name, section_title: "Pending Orders", orders: @orders.order(id: :desc) }
   end

@@ -1,4 +1,5 @@
 <div class="container">
+  <p class="Back-Button"><%= link_to 'Back', 'javascript:history.back()' %> </p>
   <h5 class="MenuCategory-Title Cart">Cart</h5>
   <% if !@cart_items.empty? %>
     <p class="Right"><%= link_to 'Delete Cart', destroy_cart_path,  method: :delete, data: { confirm: 'Are you sure?' } %></p>
