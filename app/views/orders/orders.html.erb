@@ -47,31 +47,34 @@
         <% end %>
       </div>
       <% orders.each do |order|%>
-        <div class="d-md-flex  justify-content-sm-between justify-content-sm-center border-bottom border-2 my-2 bg-light p-2 rounded-3">
-          <div class="col-sm-1 align-self-center " >
-            <h6><%=link_to order.id,orders_path(id:order.id) %></h6>
-          </div>
-          <div class="col-sm-2 align-self-center" >
-            <h6 class="Cart-Item"><%= order.total_price %></h6>
-          </div>
-          <div class="col-sm-2 align-self-center" >
-            <h6 class="Cart-Item"><%= order.order_placed %></h6>
-          </div>
-          <div class="col-sm-2 align-self-center" >
-            <h6 class="Cart-Item"><%= order.created_at.in_time_zone("Chennai").strftime("%I:%M %P") %></h6>
-          </div>
-          <% if (@current_user.is_owner? || @current_user.is_clerk?) && order.delivered_at == "Pending" %>
-            <div class="col-sm-2  align-self-center">
-              <%=form_with(url:order_path(id:order.id) ,method:"put",class:"MenuCategoryAdd") do%>
-                <%=submit_tag nil,class:"MenuCategoryAdd-Button",value:"Pending"%>
-              <%end%>
+        <% user=User.find_by(id:order.user_id) %>
+        <% if user %>
+          <div class="d-md-flex  justify-content-sm-between justify-content-sm-center border-bottom border-2 my-2 bg-light p-2 rounded-3">
+            <div class="col-sm-1 align-self-center " >
+              <h6><%=link_to order.id,orders_path(id:order.id) %></h6>
             </div>
-          <% else %>
-            <div class="col-md-2  align-self-center ">
-              <h6 class="Cart-Item"><%= order.delivered_at %></h6>
+            <div class="col-sm-2 align-self-center" >
+              <h6 class="Cart-Item"><%= order.total_price %></h6>
             </div>
-          <% end %>
-        </div>
+            <div class="col-sm-2 align-self-center" >
+              <h6 class="Cart-Item"><%= order.order_placed %></h6>
+            </div>
+            <div class="col-sm-2 align-self-center" >
+              <h6 class="Cart-Item"><%= order.created_at.in_time_zone("Chennai").strftime("%I:%M %P") %></h6>
+            </div>
+            <% if (@current_user.is_owner? || @current_user.is_clerk?) && order.delivered_at == "Pending" %>
+              <div class="col-sm-2  align-self-center">
+                <%=form_with(url:order_path(id:order.id) ,method:"put",class:"MenuCategoryAdd") do%>
+                  <%=submit_tag nil,class:"MenuCategoryAdd-Button",value:"Pending"%>
+                <%end%>
+              </div>
+            <% else %>
+              <div class="col-md-2  align-self-center ">
+                <h6 class="Cart-Item"><%= order.delivered_at %></h6>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
     <% else %>
       <h3>No <%= section_title %> Yet</h3>
