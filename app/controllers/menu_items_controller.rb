@@ -6,7 +6,7 @@ class MenuItemsController < ApplicationController
     @menu_category_id = params[:menu_category_id]
     @menu_category_name = MenuCategory.find(@menu_category_id).menu_category_name
     @menu_items = MenuItem.where("menu_category_id = ?", @menu_category_id).active
-    if params[:status] == "Inactive"
+    if params[:status] == "Inactive" && @current_user.is_owner?
       @menu_items = MenuItem.where("menu_category_id = ?", @menu_category_id).not_active
     end
     render "index"

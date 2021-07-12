@@ -36,13 +36,17 @@ class OrdersController < ApplicationController
       end
       @pagy, @orders = pagy(orders, items: 5)
     elsif current_user.is_owner?
-      @pagy, @orders = pagy(user.orders, items: 5)
+      orders = user.orders
+      if params[:from_date] && params[:to_date]
+        orders = user.orders.where("order_placed >= ? AND order_placed <= ?", params[:from_date], params[:to_date])
+      end
+      @pagy, @orders = pagy(orders, items: 5)
       user_name = user.first_name.capitalize
     else
       @pagy, @orders = pagy(current_user.orders, items: 5)
       user_name = current_user.first_name.capitalize
     end
-    render "orders", locals: { user: user_name, section_title: "Orders", orders: @orders.order(pending: :desc, id: :desc) }
+    render "orders", locals: { user_id: user.id, user: user_name, section_title: "Orders", orders: @orders.order(pending: :desc, id: :desc) }
   end
 
   def pending_orders

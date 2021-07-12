@@ -9,8 +9,8 @@
   <h4 class="MenuCategory-Title"><%= user %> <%=section_title %></h4>
   <% if !orders.empty? %>
     <div class="Report">
-      <% if section_title == "Orders" && @current_user.is_owner? && !user%>
-        <%=form_with(url:all_orders_path(id:@current_user.id),method:"get",class:"d-md-flex d-sm-block justify-content-between") do |form| %>
+      <% if section_title == "Orders" && @current_user.is_owner? %>
+        <%=form_with(url:all_orders_path,method:"get",class:"d-md-flex d-sm-block justify-content-between") do |form| %>
           <div class="Form-Report">
             <h5 class="Form-Input-Label">From Date:</p>
             <%=form.date_field :from_date,class:"Form-Input"%>
@@ -19,7 +19,11 @@
             <h5 class="Form-Input-Label">To Date:</p>
             <%=form.date_field :to_date,class:"Form-Input"%>
           </div>
-          <%= form.hidden_field :id,value: @current_user.id %>
+          <% if user %>
+            <%= form.hidden_field :id,value:user_id %>
+          <% else %>
+            <%= form.hidden_field :id,value: @current_user.id %>
+          <% end %>
           <%=form.submit nil,class:"btn btn-outline-dark col-sm-2 Button",value:"Get Orders"%>
         <%end%>
       <% end %>

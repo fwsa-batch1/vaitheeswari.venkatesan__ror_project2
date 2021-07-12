@@ -4,7 +4,7 @@ class MenuCategoriesController < ApplicationController
 
   def index
     @menu_categories = MenuCategory.active
-    if params[:status] == "Inactive"
+    if params[:status] == "Inactive" && @current_user.is_owner?
       @menu_categories = MenuCategory.not_active
     end
     render "index"
