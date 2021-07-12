@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :ensure_user_logged_in
 
   def index
-    @order = current_user.orders.find(params[:id])
+    @order = Order.find(params[:id])
     @order.update(total_price: @order.order_total)
     render "index"
   end
