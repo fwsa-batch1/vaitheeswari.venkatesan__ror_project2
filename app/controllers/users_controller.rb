@@ -31,7 +31,8 @@ class UsersController < ApplicationController
       address: params[:address],
     )
     if new_user.save
-      UserMailer.registration_confirmation(new_user).deliver_now
+      MailWorker.perform_async(new_user.id,"registration_confirmation")
+      # UserMailer.registration_confirmation(new_user).deliver_now
       if new_user.role == ""
         new_user.role = "Customer"
         new_user.save

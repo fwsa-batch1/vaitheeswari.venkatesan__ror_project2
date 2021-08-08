@@ -18,18 +18,18 @@ class UserMailer < ApplicationMailer
     mail to: user.email, :subject => "Reset password"
   end
 
-  def order_confirmation
-    @user, @order = params[:user], params[:order]
-    mail(to: @user.email, subject: "Order Confirmed")
+  def order_confirmation(order,user)
+    @user, @order = user, order
+    mail(to: user.email, subject: "Order Confirmed")
   end
 
-  def order_delivered
-    @user, @order = params[:user], params[:order]
-    mail(to: @user.email, subject: "Order delivered!")
+  def order_delivered(order,user)
+    @user, @order = user, order
+    mail(to: user.email, subject: "Order delivered!")
   end
 
-  def order_cancelled
-    @user, @order = params[:user], params[:order]
-    mail(to: @user.email, subject: "Order Cancelled")
+  def order_cancelled(order,user)
+    @user, @order = user, order
+    mail(to: user.email, subject: "Order Cancelled")
   end
 end

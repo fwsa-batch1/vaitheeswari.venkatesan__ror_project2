@@ -22,7 +22,8 @@ class OrdersController < ApplicationController
     if @current_user.is_clerk?
       new_order.update(pending: false, delivered_at: "Walk In Customer")
     else
-      UserMailer.with(order: new_order, user: @current_user).order_confirmation.deliver_now
+      MailWorker.perform_async( @current_user.id,"order_confirmation",new_order.id)
+      # UserMailer.with(order: new_order, user: @current_user).order_confirmation.deliver_now
     end
     redirect_to create_order_item_path(:id => new_order.id, :cart_id => cart.id)
   end
@@ -64,7 +65,8 @@ class OrdersController < ApplicationController
     @order.update(pending: false)
     delivered_at = @order.updated_at.in_time_zone("Chennai").strftime("%I:%M %P")
     @order.update(delivered_at: delivered_at)
-    UserMailer.with(order: @order, user: User.find(@order.user_id)).order_delivered.deliver_now
+    MailWorker.perform_async( @order.user_id,"order_delivered",@order.id)
+    # UserMailer.with(order: @order, user: User.find(@order.user_id)).order_delivered.deliver_now
     redirect_back(fallback_location: root_path)
   end
 
@@ -72,7 +74,8 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.update(pending: false)
     @order.update(delivered_at: "Canceled")
-    UserMailer.with(order: @order, user: @current_user).order_cancelled.deliver_now
+    MailWorker.perform_async( @current_user.id,"order_cancelled",@order.id)
+    # UserMailer.with(order: @order, user: @current_user).order_cancelled.deliver_now
     redirect_back(fallback_location: root_path)
   end
 
